@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Application.Features.Budgets.Commands.CreateBudget
 {
-    public class CreateBudgetCommandHandler : IRequestHandler<CreateBudgetCommand, Budget>
+    public class CreateBudgetCommandHandler : IRequestHandler<CreateBudgetCommand, int>
     {
         private readonly IBudgetRepository _budgetRepository;
         private readonly IMapper _mapper;
@@ -21,7 +21,7 @@ namespace MyWallet.Application.Features.Budgets.Commands.CreateBudget
             _mapper = mapper;
         }
 
-        public async Task<Budget> Handle(CreateBudgetCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateBudgetCommand request, CancellationToken cancellationToken)
         {
             var validator = new CreateBudgetCommandValidator(_budgetRepository);
             var validatorResult = await validator.ValidateAsync(request);
@@ -32,7 +32,7 @@ namespace MyWallet.Application.Features.Budgets.Commands.CreateBudget
             var budget = _mapper.Map<Budget>(request);
             await _budgetRepository.AddAsync(budget);
 
-            return budget;
+            return budget.Id;
         }
     }
 }

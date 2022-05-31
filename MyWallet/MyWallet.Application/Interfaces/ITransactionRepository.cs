@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Application.Interfaces
 {
-    public interface ITransactionRepository : IAsyncRepository<Transaction>
+    public interface ITransactionRepository
     {
         //Task<int> Create(CreateTransactionModel dto, int budgetId);
         //Task<Transaction> Delete(int id, int budgetId);
