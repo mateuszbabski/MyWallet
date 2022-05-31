@@ -3,6 +3,8 @@ using MyWallet.Application.Features.Budgets.Commands.CreateBudget;
 using MyWallet.Application.Features.Budgets.Commands.UpdateBudget;
 using MyWallet.Application.Features.Budgets.Queries.GetAllBudgets;
 using MyWallet.Application.Features.Budgets.Queries.GetBudgetById;
+using MyWallet.Application.Features.Transactions.Queries.GetAllTransactions;
+using MyWallet.Application.Features.Transactions.Queries.GetTransactionById;
 using MyWallet.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -20,6 +22,9 @@ namespace MyWallet.Application.Mapper
             CreateMap<Budget, BudgetInListViewModel>().ReverseMap();
             CreateMap<Budget, CreateBudgetCommand>();
             CreateMap<Budget, UpdateBudgetCommand>();
+
+            CreateMap<Transaction, TransactionViewModel>().ReverseMap();
+            CreateMap<Transaction, TransactionInListViewModel>().ReverseMap();
         }
     }
 }

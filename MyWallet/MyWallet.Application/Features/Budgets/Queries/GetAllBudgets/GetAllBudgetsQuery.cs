@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Application.Features.Budgets.Queries.GetAllBudgets
 {
-    public class GetAllBudgetsQuery : IRequest<List<BudgetInListViewModel>>
+    public class GetAllBudgetsQuery : IRequest<IEnumerable<BudgetInListViewModel>>
     {
 
     }
