@@ -9,6 +9,6 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetAllTransactions
 {
     public class GetAllTransactionsQuery : IRequest<IEnumerable<TransactionInListViewModel>>
     {
-        public int BudgetID { get; set; }
+        public int BudgetId { get; set; }
     }
 }

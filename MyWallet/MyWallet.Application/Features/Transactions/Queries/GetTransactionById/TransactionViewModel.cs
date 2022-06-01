@@ -10,7 +10,7 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionById
     public class TransactionViewModel
     {
         public int Id { get; set; }
-        public int BudgetID { get; set; }
+        public int BudgetId { get; set; }
         public string Type { get; set; }
         public string Category { get; set; }
         public decimal Value { get; set; }

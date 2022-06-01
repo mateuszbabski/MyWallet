@@ -10,12 +10,37 @@ namespace MyWallet.Application.Features.Transactions.Commands.CreateTransaction
 {
     public class CreateTransactionCommandValidator : AbstractValidator<CreateTransactionCommand>
     {
-        private readonly ITransactionRepository _transactionRepository;
+        
 
-        public CreateTransactionCommandValidator(ITransactionRepository transactionRepository)
+        public CreateTransactionCommandValidator()
         {
-            _transactionRepository = transactionRepository;
+            RuleFor(i => i.BudgetId)
+                .NotEmpty()
+                .NotNull()
+                .WithMessage("Transaction can't be specified out of budget");
 
+            RuleFor(t => t.Type)
+                .NotEmpty()
+                .NotNull()
+                .MaximumLength(20)
+                .WithMessage("Type of transaction is required");
+
+            RuleFor(c => c.Category)
+                .NotEmpty()
+                .NotNull()
+                .MaximumLength(20)
+                .WithMessage("Category must be specified");
+
+            RuleFor(v => v.Value)
+                .NotEmpty()
+                .NotNull()
+                .GreaterThan(0)
+                .WithMessage("Value can't be lower than 0");
+
+            RuleFor(d => d.TransactionDate)
+                .NotNull()
+                .NotEmpty()
+                .WithMessage("Transaction date is required");
 
         }
     }

@@ -17,6 +17,7 @@ namespace MyWallet.Application.Interfaces
         Task DeleteAsync(TransactionViewModel transaction);
         Task<int> AddAsync(Transaction transaction);
         Task UpdateAsync(Transaction transaction);
+        
     }
 }
         

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Application.Features.Budgets.Commands.UpdateBudget
 {
-    internal class UpdateBudgetCommandHandler : IRequestHandler<UpdateBudgetCommand>
+    public class UpdateBudgetCommandHandler : IRequestHandler<UpdateBudgetCommand>
     {
         private readonly IBudgetRepository _budgetRepository;
         private readonly IMapper _mapper;

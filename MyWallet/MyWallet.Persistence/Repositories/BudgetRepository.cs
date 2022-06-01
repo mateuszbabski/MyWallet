@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyWallet.Application.Features.Budgets.Queries.GetAllBudgets;
 using MyWallet.Application.Features.Budgets.Queries.GetBudgetById;
+using MyWallet.Application.Interfaces;
 using MyWallet.Domain.Entities;
 using MyWallet.Persistence.Context;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Persistence.Repositories
 {
-    public class BudgetRepository
+    public class BudgetRepository : IBudgetRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -22,12 +23,20 @@ namespace MyWallet.Persistence.Repositories
 
         public async Task<IEnumerable<BudgetInListViewModel>> GetAllAsync()
         {
-            return await _dbContext.Set<BudgetInListViewModel>().ToListAsync();
+            
+            return await _dbContext
+                .Set<BudgetInListViewModel>()
+                .Include(t => t.Transactions)
+                .ToListAsync();
         }
 
         public async Task<BudgetViewModel> GetByIdAsync(int id)
         {
-            return await _dbContext.Set<BudgetViewModel>().FindAsync(id);
+
+            return await _dbContext
+                .Set<BudgetViewModel>()
+                .Include(t => t.Transactions)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task UpdateAsync(Budget budget)

@@ -10,5 +10,6 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionById
     public class GetTransactionByIdQuery : IRequest<TransactionViewModel>
     {
         public int Id { get; set; }
+        public int BudgetId { get; set; }
     }
 }

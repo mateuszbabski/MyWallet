@@ -25,7 +25,7 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetAllTransactions
 
         public async Task<IEnumerable<TransactionInListViewModel>> Handle(GetAllTransactionsQuery request, CancellationToken cancellationToken)
         {
-            var budget = await _budgetRepository.GetByIdAsync(request.BudgetID);
+            var budget = await _budgetRepository.GetByIdAsync(request.BudgetId);
             var transactions = await _transactionRepository.GetAllAsync(budget);
 
             return _mapper.Map<IEnumerable<TransactionInListViewModel>>(transactions);

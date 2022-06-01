@@ -2,6 +2,7 @@
 using MyWallet.Application.Features.Budgets.Queries.GetBudgetById;
 using MyWallet.Application.Features.Transactions.Queries.GetAllTransactions;
 using MyWallet.Application.Features.Transactions.Queries.GetTransactionById;
+using MyWallet.Application.Interfaces;
 using MyWallet.Domain.Entities;
 using MyWallet.Persistence.Context;
 using System;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Persistence.Repositories
 {
-    public class TransactionRepository
+    public class TransactionRepository : ITransactionRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -23,19 +24,23 @@ namespace MyWallet.Persistence.Repositories
 
         public async Task<IEnumerable<TransactionInListViewModel>> GetAllAsync(BudgetViewModel budget)
         {
-            return await _dbContext.Set<TransactionInListViewModel>()
-                .Where(x => x.BudgetID == budget.Id).ToListAsync();
+            return await _dbContext
+                .Set<TransactionInListViewModel>()
+                .Where(x => x.BudgetId == budget.Id)
+                .ToListAsync();
         }
 
         public async Task<TransactionViewModel> GetByIdAsync(BudgetViewModel budget, int id)
         {
-            return await _dbContext.Set<TransactionViewModel>()
-                .Where(x => x.BudgetID == budget.Id)
+            return await _dbContext
+                .Set<TransactionViewModel>()
+                .Where(x => x.BudgetId == budget.Id)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task UpdateAsync(Transaction transaction)
         {
+            
             _dbContext.Entry(transaction).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
         }

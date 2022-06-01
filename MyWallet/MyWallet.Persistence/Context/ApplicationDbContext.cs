@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyWallet.Application.Interfaces;
 using MyWallet.Domain.Entities;
 using System;
 using System.Collections.Generic;
