@@ -11,12 +11,8 @@ namespace MyWallet.Application.Features.Budgets.Commands.CreateBudget
 {
     public class CreateBudgetCommandValidator : AbstractValidator<CreateBudgetCommand>
     {
-        private readonly Interfaces.IBudgetRepository _budgetRepository;
-
-        public CreateBudgetCommandValidator(IBudgetRepository budgetRepository)
+        public CreateBudgetCommandValidator()
         {
-            _budgetRepository = budgetRepository;
-
             RuleFor(p => p.Name)
                 .NotEmpty();
             RuleFor(p => p.Description)
@@ -24,3 +20,7 @@ namespace MyWallet.Application.Features.Budgets.Commands.CreateBudget
         }
     }
 }
+        
+
+            
+

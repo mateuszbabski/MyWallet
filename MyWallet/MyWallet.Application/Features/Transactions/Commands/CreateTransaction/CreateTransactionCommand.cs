@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Application.Features.Transactions.Commands.CreateTransaction
 {
-    internal class CreateTransactionCommand
+    public class CreateTransactionCommand
     {
     }
 }

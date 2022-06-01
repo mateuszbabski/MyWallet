@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Persistence.Context
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
-        
+
         public DbSet<Budget> Budgets { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<User> Users { get; set; }
@@ -20,6 +20,6 @@ namespace MyWallet.Persistence.Context
         {
             return await base.SaveChangesAsync();
         }
-        
+
     }
 }

@@ -12,13 +12,6 @@ namespace MyWallet.Application.Interfaces
 {
     public interface ITransactionRepository
     {
-        //Task<int> Create(CreateTransactionModel dto, int budgetId);
-        //Task<Transaction> Delete(int id, int budgetId);
-        //Task<PagedList<TransactionModel>> GetAll(int budgetId, RequestParams request);
-        //Task<TransactionModel> GetById(int id, int budgetId);
-        //Task<int> Update(UpdateTransactionModel dto, int id, int budgetId);
-        //Task<Budget> GetBudgetById(int budgetId);
-        
         Task<IEnumerable<TransactionInListViewModel>> GetAllAsync(BudgetViewModel budget);
         Task<TransactionViewModel> GetByIdAsync(BudgetViewModel budget, int id);
         Task DeleteAsync(TransactionViewModel transaction);
@@ -26,3 +19,5 @@ namespace MyWallet.Application.Interfaces
         Task UpdateAsync(Transaction transaction);
     }
 }
+        
+        

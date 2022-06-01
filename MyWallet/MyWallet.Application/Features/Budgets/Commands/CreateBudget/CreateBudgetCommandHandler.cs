@@ -23,7 +23,7 @@ namespace MyWallet.Application.Features.Budgets.Commands.CreateBudget
 
         public async Task<int> Handle(CreateBudgetCommand request, CancellationToken cancellationToken)
         {
-            var validator = new CreateBudgetCommandValidator(_budgetRepository);
+            var validator = new CreateBudgetCommandValidator();
             var validatorResult = await validator.ValidateAsync(request);
 
             if (!validatorResult.IsValid)
