@@ -16,25 +16,29 @@ namespace MyWallet.Persistence.Repositories
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public BudgetRepository(ApplicationDbContext dbContext) : base(dbContext) { }
+        public BudgetRepository(ApplicationDbContext dbContext) : base(dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
 
         //public async Task<IEnumerable<BudgetInListViewModel>> GetAllAsync()
         //{
-            
+
         //    return await _dbContext
         //        .Set<BudgetInListViewModel>()
         //        .Include(t => t.Transactions)
         //        .ToListAsync();
         //}
 
-        //public async Task<BudgetViewModel> GetByIdAsync(int id)
-        //{
+        public async Task<Budget> GetBudgetByIdAsync(int id)
+        {
 
-        //    return await _dbContext
-        //        .Set<BudgetViewModel>()
-        //        .Include(t => t.Transactions)
-        //        .FirstOrDefaultAsync(x => x.Id == id);
-        //}
+            return await _dbContext
+                .Budgets
+                .Include(t => t.Transactions)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
 
         //public async Task UpdateAsync(Budget budget)
         //{

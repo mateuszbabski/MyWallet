@@ -26,8 +26,10 @@ namespace MyWallet.Application.Features.Transactions.Commands.UpdateTransaction
         public async Task<Unit> Handle(UpdateTransactionCommand request, CancellationToken cancellationToken)
         {
             var budget = await _budgetRepository.GetByIdAsync(request.BudgetId);
-            var transaction = await _transactionRepository.GetByIdAsync(budget, request.Id);
+            //var transaction = await _transactionRepository.GetByIdAsync(budget, request.Id);
+            var transaction = await _transactionRepository.GetByIdAsync(request.Id);
 
+            transaction.BudgetId = request.BudgetId;
             transaction.Type = request.Type;
             transaction.Category = request.Category;
             transaction.Value = request.Value;

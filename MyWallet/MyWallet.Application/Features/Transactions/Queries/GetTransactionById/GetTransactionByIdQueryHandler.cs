@@ -25,7 +25,8 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionById
         public async Task<TransactionViewModel> Handle(GetTransactionByIdQuery request, CancellationToken cancellationToken)
         {
             var budget = await _budgetRepository.GetByIdAsync(request.BudgetId);
-            var transaction = await _transactionRepository.GetByIdAsync(budget, request.Id);
+            //var transaction = await _transactionRepository.GetByIdAsync(budget, request.Id);
+            var transaction = await _transactionRepository.GetByIdAsync(request.Id);
 
             return _mapper.Map<TransactionViewModel>(transaction);
         }

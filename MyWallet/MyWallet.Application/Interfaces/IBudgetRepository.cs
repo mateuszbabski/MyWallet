@@ -13,7 +13,7 @@ namespace MyWallet.Application.Interfaces
     {
         
         //Task<IEnumerable<BudgetInListViewModel>> GetAllAsync();
-        //Task<BudgetViewModel> GetByIdAsync(int id);
+        Task<Budget> GetBudgetByIdAsync(int id);
         //Task<int> AddAsync(Budget budget);
         //Task UpdateAsync(Budget budget);
         //Task DeleteAsync(BudgetViewModel budget);

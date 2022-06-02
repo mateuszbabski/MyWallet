@@ -9,7 +9,7 @@ using MyWallet.Domain.Entities;
 
 namespace MyWallet.Api.Controllers
 {
-    [Route("api/budget/{budgetId}/[controller]/")]
+    [Route("api/[controller]/")]
     [ApiController]
     public class TransactionController : ControllerBase
     {
@@ -22,15 +22,15 @@ namespace MyWallet.Api.Controllers
 
         // GetAll
         [HttpGet(Name = "GetAllTransactions")]
-        public async Task<ActionResult<IEnumerable<TransactionInListViewModel>>> GetAllTransactions(Budget budget)
+        public async Task<ActionResult<IEnumerable<TransactionInListViewModel>>> GetAllTransactions()
         {
             var transactionList = await _mediator.Send(new GetAllTransactionsQuery());
             return Ok(transactionList);
         }
 
         // GetById
-        [HttpGet("{id}", Name  = "GetTransactionById")]
-        public async Task<ActionResult<TransactionViewModel>> GetTransactionById(Budget budget, int id)
+        [HttpGet("{id}", Name = "GetTransactionById")]
+        public async Task<ActionResult<TransactionViewModel>> GetTransactionById(int id)
         {
             var transaction = await _mediator.Send(new GetTransactionByIdQuery()
             {

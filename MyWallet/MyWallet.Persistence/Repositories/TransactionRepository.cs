@@ -13,50 +13,54 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Persistence.Repositories
 {
-    public class TransactionRepository : ITransactionRepository
+    public class TransactionRepository : BaseRepository<Transaction>, ITransactionRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public TransactionRepository(ApplicationDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+        public TransactionRepository(ApplicationDbContext dbContext) : base(dbContext) { }
 
-        public async Task<IEnumerable<TransactionInListViewModel>> GetAllAsync(Budget budget)
-        {
-            return await _dbContext
-                .Set<TransactionInListViewModel>()
-                .Where(x => x.BudgetId == budget.Id)
-                .ToListAsync();
-        }
+        //private readonly ApplicationDbContext _dbContext;
 
-        public async Task<TransactionViewModel> GetByIdAsync(Budget budget, int id)
-        {
-            return await _dbContext
-                .Set<TransactionViewModel>()
-                .Where(x => x.BudgetId == budget.Id)
-                .FirstOrDefaultAsync(x => x.Id == id);
-        }
+        //public TransactionRepository(ApplicationDbContext dbContext)
+        //{
+        //    _dbContext = dbContext;
+        //}
 
-        public async Task UpdateAsync(Transaction transaction)
-        {
-            
-            _dbContext.Entry(transaction).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
-        }
+        //public async Task<IEnumerable<TransactionInListViewModel>> GetAllAsync(Budget budget)
+        //{
+        //    return await _dbContext
+        //        .Set<TransactionInListViewModel>()
+        //        .Where(x => x.BudgetId == budget.Id)
+        //        .ToListAsync();
+        //}
 
-        public async Task DeleteAsync(TransactionViewModel transaction)
-        {
-            _dbContext.Set<TransactionViewModel>().Remove(transaction);
-            await _dbContext.SaveChangesAsync();
-        }
+        //public async Task<TransactionViewModel> GetByIdAsync(Budget budget, int id)
+        //{
+        //    return await _dbContext
+        //        .Set<TransactionViewModel>()
+        //        .Where(x => x.BudgetId == budget.Id)
+        //        .FirstOrDefaultAsync(x => x.Id == id);
+        //}
 
-        public async Task<int> AddAsync(Transaction transaction)
-        {
-            await _dbContext.Set<Transaction>().AddAsync(transaction);
-            await _dbContext.SaveChangesAsync();
+        //public async Task UpdateAsync(Transaction transaction)
+        //{
 
-            return transaction.Id;
-        }
+        //    _dbContext.Entry(transaction).State = EntityState.Modified;
+        //    await _dbContext.SaveChangesAsync();
+        //}
+
+        //public async Task DeleteAsync(TransactionViewModel transaction)
+        //{
+        //    _dbContext.Set<TransactionViewModel>().Remove(transaction);
+        //    await _dbContext.SaveChangesAsync();
+        //}
+
+        //public async Task<int> AddAsync(Transaction transaction)
+        //{
+        //    await _dbContext.Set<Transaction>().AddAsync(transaction);
+        //    await _dbContext.SaveChangesAsync();
+
+        //    return transaction.Id;
+        //}
     }
 }

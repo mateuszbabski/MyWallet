@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Application.Interfaces
 {
-    public interface ITransactionRepository
+    public interface ITransactionRepository : IAsyncRepository<Transaction>
     {
-        Task<IEnumerable<TransactionInListViewModel>> GetAllAsync(Budget budget);
-        Task<TransactionViewModel> GetByIdAsync(Budget budget, int id);
-        Task DeleteAsync(TransactionViewModel transaction);
-        Task<int> AddAsync(Transaction transaction);
-        Task UpdateAsync(Transaction transaction);
+        //Task<IEnumerable<TransactionInListViewModel>> GetAllAsync(Budget budget);
+        //Task<TransactionViewModel> GetByIdAsync(Budget budget, int id);
+        //Task DeleteAsync(TransactionViewModel transaction);
+        //Task<int> AddAsync(Transaction transaction);
+        //Task UpdateAsync(Transaction transaction);
         
     }
 }

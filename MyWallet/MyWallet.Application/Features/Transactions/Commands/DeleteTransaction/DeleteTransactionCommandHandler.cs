@@ -22,7 +22,8 @@ namespace MyWallet.Application.Features.Transactions.Commands.DeleteTransaction
         public async Task<Unit> Handle(DeleteTransactionCommand request, CancellationToken cancellationToken)
         {
             var budget = await _budgetRepository.GetByIdAsync(request.BudgetId);
-            var transaction = await _transactionRepository.GetByIdAsync(budget, request.Id);
+            //var transaction = await _transactionRepository.GetByIdAsync(budget, request.Id);
+            var transaction = await _transactionRepository.GetByIdAsync(request.Id);
 
             await _transactionRepository.DeleteAsync(transaction);
             return Unit.Value;

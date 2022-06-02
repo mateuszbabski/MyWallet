@@ -23,9 +23,10 @@ namespace MyWallet.Application.Features.Budgets.Queries.GetBudgetById
 
         public async Task<BudgetViewModel> Handle(GetBudgetByIdQuery request, CancellationToken cancellationToken)
         {
-            var budget = await _budgetRepository.GetByIdAsync(request.Id);
-
+            var budget = await _budgetRepository.GetBudgetByIdAsync(request.Id);
+            
             return _mapper.Map<BudgetViewModel>(budget);
         }
     }
 }
+

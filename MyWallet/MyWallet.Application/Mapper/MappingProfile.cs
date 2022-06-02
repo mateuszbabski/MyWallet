@@ -25,9 +25,9 @@ namespace MyWallet.Application.Mapper
             CreateMap<Budget, CreateBudgetCommand>().ReverseMap();
             CreateMap<UpdateBudgetCommand, Budget>();
 
-            CreateMap<Transaction, TransactionViewModel>().ReverseMap();
-            CreateMap<Transaction, TransactionInListViewModel>().ReverseMap();
-            CreateMap<Transaction, CreateTransactionCommand>().ReverseMap();
+            CreateMap<Transaction, TransactionViewModel>();
+            CreateMap<Transaction, TransactionInListViewModel>();
+            CreateMap<CreateTransactionCommand, Transaction>();
             CreateMap<UpdateTransactionCommand, Transaction>();
         }
     }
