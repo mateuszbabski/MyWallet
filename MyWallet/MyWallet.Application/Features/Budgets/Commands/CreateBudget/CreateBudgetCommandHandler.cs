@@ -30,7 +30,7 @@ namespace MyWallet.Application.Features.Budgets.Commands.CreateBudget
                 throw new Exception("Not validated");
 
             var budget = _mapper.Map<Budget>(request);
-            await _budgetRepository.AddAsync(budget);
+            await _budgetRepository.AddBudgetAsync(budget);
 
             return budget.Id;
         }

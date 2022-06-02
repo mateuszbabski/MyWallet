@@ -26,7 +26,7 @@ namespace MyWallet.Persistence.Repositories
         //    _dbContext = dbContext;
         //}
 
-        //public async Task<IEnumerable<TransactionInListViewModel>> GetAllAsync(Budget budget)
+        //public async Task<IEnumerable<TransactionInListViewModel>> GetAllTransactionsAsync(Budget budget)
         //{
         //    return await _dbContext
         //        .Set<TransactionInListViewModel>()
@@ -34,7 +34,7 @@ namespace MyWallet.Persistence.Repositories
         //        .ToListAsync();
         //}
 
-        //public async Task<TransactionViewModel> GetByIdAsync(Budget budget, int id)
+        //public async Task<TransactionViewModel> GetTransactionByIdAsync(Budget budget, int id)
         //{
         //    return await _dbContext
         //        .Set<TransactionViewModel>()
@@ -42,20 +42,20 @@ namespace MyWallet.Persistence.Repositories
         //        .FirstOrDefaultAsync(x => x.Id == id);
         //}
 
-        //public async Task UpdateAsync(Transaction transaction)
+        //public async Task UpdateTransactionAsync(Transaction transaction)
         //{
 
         //    _dbContext.Entry(transaction).State = EntityState.Modified;
         //    await _dbContext.SaveChangesAsync();
         //}
 
-        //public async Task DeleteAsync(TransactionViewModel transaction)
+        //public async Task DeleteTransactionAsync(TransactionViewModel transaction)
         //{
         //    _dbContext.Set<TransactionViewModel>().Remove(transaction);
         //    await _dbContext.SaveChangesAsync();
         //}
 
-        //public async Task<int> AddAsync(Transaction transaction)
+        //public async Task<int> AddTransactionAsync(Transaction transaction)
         //{
         //    await _dbContext.Set<Transaction>().AddAsync(transaction);
         //    await _dbContext.SaveChangesAsync();

@@ -12,13 +12,13 @@ namespace MyWallet.Application.Interfaces
     public interface IBudgetRepository : IAsyncRepository<Budget>
     {
         
-        //Task<IEnumerable<BudgetInListViewModel>> GetAllAsync();
+        Task<IEnumerable<Budget>> GetAllBudgetsAsync();
         Task<Budget> GetBudgetByIdAsync(int id);
-        //Task<int> AddAsync(Budget budget);
-        //Task UpdateAsync(Budget budget);
-        //Task DeleteAsync(BudgetViewModel budget);
+        Task<int> AddBudgetAsync(Budget budget);
+        Task UpdateBudgetAsync(Budget budget);
+        Task DeleteBudgetAsync(Budget budget);
 
-        //Task<Budget> GetBudgetByIdAsync(int id);
+
     }
 }
         

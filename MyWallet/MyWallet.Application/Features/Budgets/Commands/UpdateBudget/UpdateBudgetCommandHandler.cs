@@ -22,7 +22,7 @@ namespace MyWallet.Application.Features.Budgets.Commands.UpdateBudget
         }
         public async Task<Unit> Handle(UpdateBudgetCommand request, CancellationToken cancellationToken)
         {
-            var budget = await _budgetRepository.GetByIdAsync(request.Id);
+            var budget = await _budgetRepository.GetBudgetByIdAsync(request.Id);
 
             if(budget == null)
             {
@@ -33,7 +33,7 @@ namespace MyWallet.Application.Features.Budgets.Commands.UpdateBudget
             budget.Description = request.Description;
 
             var newBudget = _mapper.Map<Budget>(budget);
-            await _budgetRepository.UpdateAsync(newBudget);
+            await _budgetRepository.UpdateBudgetAsync(newBudget);
 
             return Unit.Value;
         }

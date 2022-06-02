@@ -22,14 +22,14 @@ namespace MyWallet.Persistence.Repositories
         }
 
 
-        //public async Task<IEnumerable<BudgetInListViewModel>> GetAllAsync()
-        //{
+        public async Task<IEnumerable<Budget>> GetAllBudgetsAsync()
+        {
 
-        //    return await _dbContext
-        //        .Set<BudgetInListViewModel>()
-        //        .Include(t => t.Transactions)
-        //        .ToListAsync();
-        //}
+            return await _dbContext
+                .Budgets
+                .Include(t => t.Transactions)
+                .ToListAsync();
+        }
 
         public async Task<Budget> GetBudgetByIdAsync(int id)
         {
@@ -40,33 +40,28 @@ namespace MyWallet.Persistence.Repositories
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        //public async Task UpdateAsync(Budget budget)
-        //{
-        //    _dbContext.Entry(budget).State = EntityState.Modified;
-        //    await _dbContext.SaveChangesAsync();
-        //}
+        public async Task UpdateBudgetAsync(Budget budget)
+        {
+            //_dbContext.Entry(budget).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
+        }
 
-        //public async Task DeleteAsync(BudgetViewModel budget)
-        //{
-        //    _dbContext.Set<Budget>().Remove(budget);
-        //    await _dbContext.SaveChangesAsync();
-        //}
+        public async Task DeleteBudgetAsync(Budget budget)
+        {
+            _dbContext.Budgets.Remove(budget);
+            await _dbContext.SaveChangesAsync();
+        }
 
-        //public async Task<int> AddAsync(Budget budget)
-        //{
-        //    await _dbContext.Set<Budget>().AddAsync(budget);
-        //    await _dbContext.SaveChangesAsync();
+        public async Task<int> AddBudgetAsync(Budget budget)
+        {
+            await _dbContext.Budgets.AddAsync(budget);
+            await _dbContext.SaveChangesAsync();
 
-        //    return budget.Id;
-        //}
-
-        //public async Task<Budget> GetBudgetByIdAsync(int id)
-        //{
-        //    return await _dbContext
-        //        .Set<Budget>()
-        //        .FindAsync(id);
-        //}
-
+            return budget.Id;
+        }
 
     }
 }
+       
+
+

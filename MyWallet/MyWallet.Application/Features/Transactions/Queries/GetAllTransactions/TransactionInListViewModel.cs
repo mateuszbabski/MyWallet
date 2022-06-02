@@ -16,6 +16,6 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetAllTransactions
         public decimal Value { get; set; }
         public DateTime TransactionDate { get; set; }
         public string Description { get; set; }
-        public virtual Budget Budget { get; set; }
+        //public virtual Budget Budget { get; set; }
     }
 }

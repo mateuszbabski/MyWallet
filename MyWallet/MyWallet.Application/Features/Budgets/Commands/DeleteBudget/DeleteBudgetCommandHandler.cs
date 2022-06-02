@@ -23,9 +23,9 @@ namespace MyWallet.Application.Features.Budgets.Commands.DeleteBudget
 
         public async Task<Unit> Handle(DeleteBudgetCommand request, CancellationToken cancellationToken)
         {
-            var budget = await _budgetRepository.GetByIdAsync(request.Id);
+            var budget = await _budgetRepository.GetBudgetByIdAsync(request.Id);
 
-            await _budgetRepository.DeleteAsync(budget);
+            await _budgetRepository.DeleteBudgetAsync(budget);
             return Unit.Value;
         }
     }
