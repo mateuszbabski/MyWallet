@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Domain.Entities
 {
-    public class Transaction : AuditableEntity
+    public class Transaction 
     {
         public int Id { get; set; }
         public int BudgetId { get; set; }

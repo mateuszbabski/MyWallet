@@ -29,14 +29,14 @@ namespace MyWallet.Application.Features.Budgets.Commands.UpdateBudget
                 throw new Exception("Budget not found");
             }
 
-            
             budget.Name = request.Name;
             budget.Description = request.Description;
 
             var newBudget = _mapper.Map<Budget>(budget);
-            await _budgetRepository.UpdateAsync(budget);
+            await _budgetRepository.UpdateAsync(newBudget);
 
             return Unit.Value;
         }
     }
 }
+            
