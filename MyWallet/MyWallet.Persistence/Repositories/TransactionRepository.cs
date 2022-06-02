@@ -22,7 +22,7 @@ namespace MyWallet.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<TransactionInListViewModel>> GetAllAsync(BudgetViewModel budget)
+        public async Task<IEnumerable<TransactionInListViewModel>> GetAllAsync(Budget budget)
         {
             return await _dbContext
                 .Set<TransactionInListViewModel>()
@@ -30,7 +30,7 @@ namespace MyWallet.Persistence.Repositories
                 .ToListAsync();
         }
 
-        public async Task<TransactionViewModel> GetByIdAsync(BudgetViewModel budget, int id)
+        public async Task<TransactionViewModel> GetByIdAsync(Budget budget, int id)
         {
             return await _dbContext
                 .Set<TransactionViewModel>()

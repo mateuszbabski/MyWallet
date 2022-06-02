@@ -9,7 +9,7 @@ namespace MyWallet.Application.Features.Transactions.Commands.CreateTransaction
 {
     public class CreateTransactionCommand : IRequest<int>
     {
-        public int Id { get; set; }
+        
         public int BudgetId { get; set; }
         public string Type { get; set; }
         public string Category { get; set; }
