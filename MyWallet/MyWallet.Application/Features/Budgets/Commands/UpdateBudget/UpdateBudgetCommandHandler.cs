@@ -22,8 +22,18 @@ namespace MyWallet.Application.Features.Budgets.Commands.UpdateBudget
         }
         public async Task<Unit> Handle(UpdateBudgetCommand request, CancellationToken cancellationToken)
         {
-            var budget = _mapper.Map<Budget>(request);
+            var budget = await _budgetRepository.GetByIdAsync(request.Id);
 
+            if(budget == null)
+            {
+                throw new Exception("Budget not found");
+            }
+
+            
+            budget.Name = request.Name;
+            budget.Description = request.Description;
+
+            var newBudget = _mapper.Map<Budget>(budget);
             await _budgetRepository.UpdateAsync(budget);
 
             return Unit.Value;

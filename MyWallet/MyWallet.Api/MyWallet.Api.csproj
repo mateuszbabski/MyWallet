@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MyWallet.Application\MyWallet.Application.csproj" />
     <ProjectReference Include="..\MyWallet.Persistence\MyWallet.Persistence.csproj" />
     <ProjectReference Include="..\Persistence\MyWallet.Persistence.csproj" />

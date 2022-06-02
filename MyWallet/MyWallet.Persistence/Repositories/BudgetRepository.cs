@@ -12,51 +12,57 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Persistence.Repositories
 {
-    public class BudgetRepository : IBudgetRepository
+    public class BudgetRepository : BaseRepository<Budget>, IBudgetRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public BudgetRepository(ApplicationDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+        public BudgetRepository(ApplicationDbContext dbContext) : base(dbContext) { }
 
-        public async Task<IEnumerable<BudgetInListViewModel>> GetAllAsync()
-        {
+        //public async Task<IEnumerable<BudgetInListViewModel>> GetAllAsync()
+        //{
             
-            return await _dbContext
-                .Set<BudgetInListViewModel>()
-                .Include(t => t.Transactions)
-                .ToListAsync();
-        }
+        //    return await _dbContext
+        //        .Set<BudgetInListViewModel>()
+        //        .Include(t => t.Transactions)
+        //        .ToListAsync();
+        //}
 
-        public async Task<BudgetViewModel> GetByIdAsync(int id)
-        {
+        //public async Task<BudgetViewModel> GetByIdAsync(int id)
+        //{
 
-            return await _dbContext
-                .Set<BudgetViewModel>()
-                .Include(t => t.Transactions)
-                .FirstOrDefaultAsync(x => x.Id == id);
-        }
+        //    return await _dbContext
+        //        .Set<BudgetViewModel>()
+        //        .Include(t => t.Transactions)
+        //        .FirstOrDefaultAsync(x => x.Id == id);
+        //}
 
-        public async Task UpdateAsync(Budget budget)
-        {
-            _dbContext.Entry(budget).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
-        }
+        //public async Task UpdateAsync(Budget budget)
+        //{
+        //    _dbContext.Entry(budget).State = EntityState.Modified;
+        //    await _dbContext.SaveChangesAsync();
+        //}
 
-        public async Task DeleteAsync(BudgetViewModel budget)
-        {
-            _dbContext.Set<BudgetViewModel>().Remove(budget);
-            await _dbContext.SaveChangesAsync();
-        }
+        //public async Task DeleteAsync(BudgetViewModel budget)
+        //{
+        //    _dbContext.Set<Budget>().Remove(budget);
+        //    await _dbContext.SaveChangesAsync();
+        //}
 
-        public async Task<int> AddAsync(Budget budget)
-        {
-            await _dbContext.Set<Budget>().AddAsync(budget);
-            await _dbContext.SaveChangesAsync();
+        //public async Task<int> AddAsync(Budget budget)
+        //{
+        //    await _dbContext.Set<Budget>().AddAsync(budget);
+        //    await _dbContext.SaveChangesAsync();
 
-            return budget.Id;
-        }
+        //    return budget.Id;
+        //}
+
+        //public async Task<Budget> GetBudgetByIdAsync(int id)
+        //{
+        //    return await _dbContext
+        //        .Set<Budget>()
+        //        .FindAsync(id);
+        //}
+
+
     }
 }

@@ -9,13 +9,17 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Application.Interfaces
 {
-    public interface IBudgetRepository
+    public interface IBudgetRepository : IAsyncRepository<Budget>
     {
         
-        Task DeleteAsync(BudgetViewModel budget);
-        Task<IEnumerable<BudgetInListViewModel>> GetAllAsync();
-        Task<BudgetViewModel> GetByIdAsync(int id);
-        Task<int> AddAsync(Budget budget);
-        Task UpdateAsync(Budget budget);
+        //Task<IEnumerable<BudgetInListViewModel>> GetAllAsync();
+        //Task<BudgetViewModel> GetByIdAsync(int id);
+        //Task<int> AddAsync(Budget budget);
+        //Task UpdateAsync(Budget budget);
+        //Task DeleteAsync(BudgetViewModel budget);
+
+        //Task<Budget> GetBudgetByIdAsync(int id);
     }
 }
+        
+
