@@ -30,21 +30,18 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionsByBu
             public async Task<PaginatedList<TransactionInListViewModel>> Handle(GetTransactionsByBudgetIdQuery request,
                 CancellationToken cancellationToken)
             {
-                var budget = await _budgetRepository.GetBudgetByIdAsync(request.BudgetId);
-                var transactions = await _transactionRepository.GetTransactionsByBudgetIdAsync(request.SearchPhrase, request.BudgetId);
-
-                var transactionsPaged = transactions
-                    .Skip((request.PageNumber - 1) * request.PageSize)
-                    .Take(request.PageSize)
-                    .ToList();
+                var transactions = await _transactionRepository.GetTransactionsByBudgetIdAsync(request.SearchPhrase, request.BudgetId, request.PageNumber, request.PageSize);
 
                 var count = transactions.Count();
 
-                var transactionDto = _mapper.Map<List<TransactionInListViewModel>>(transactionsPaged);
+                var transactionDto = _mapper.Map<List<TransactionInListViewModel>>(transactions);
                 var result = new PaginatedList<TransactionInListViewModel>(transactionDto, count, request.PageNumber, request.PageSize);
 
                 return result;
             }
         }
     }
+                
+                
+
 

@@ -28,7 +28,7 @@ namespace MyWallet.Persistence.Repositories
                 .OrderByDescending(t => t.TransactionDate)
                 .ToListAsync();
         }
-        public async Task<IEnumerable<Transaction>> GetTransactionsByBudgetIdAsync(string searchPhrase, int budgetId)
+        public async Task<IEnumerable<Transaction>> GetTransactionsByBudgetIdAsync(string searchPhrase, int budgetId, int pageNumber, int pageSize)
         {
             if (!string.IsNullOrEmpty(searchPhrase))
             {
@@ -39,17 +39,21 @@ namespace MyWallet.Persistence.Repositories
                                                      || (x.Category.ToLower().Contains(searchPhrase.ToLower())
                                                      || x.Type.ToLower().Contains(searchPhrase.ToLower())))
                     .OrderByDescending(t => t.TransactionDate)
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
                     .ToListAsync();
             }
+
             return await _dbContext
                 .Transactions
                 .Where(t => t.BudgetId == budgetId)
                 .OrderByDescending(t => t.TransactionDate)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
         }
 
-    
-        public async Task<IEnumerable<Transaction>> GetTransactionsBySearchAsync(string searchPhrase)
+        public async Task<IEnumerable<Transaction>> GetTransactionsBySearchAsync(string searchPhrase, int pageNumber, int pageSize)
         {
             if (!string.IsNullOrEmpty(searchPhrase))
             {
@@ -59,14 +63,19 @@ namespace MyWallet.Persistence.Repositories
                                                      || (x.Category.ToLower().Contains(searchPhrase.ToLower())
                                                      || x.Type.ToLower().Contains(searchPhrase.ToLower())))
                     .OrderByDescending(t => t.TransactionDate)
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
                     .ToListAsync();
+                
             }
             return await _dbContext
                 .Transactions
                 .OrderByDescending(t => t.TransactionDate)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
         }
-       
+
         public async Task<Transaction> GetTransactionByIdAsync(int id)
         {
             return await _dbContext

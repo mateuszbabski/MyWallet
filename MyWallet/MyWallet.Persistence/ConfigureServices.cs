@@ -16,10 +16,6 @@ namespace MyWallet.Persistence
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-
-            //services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
             services.AddScoped<IBudgetRepository, BudgetRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
@@ -28,3 +24,4 @@ namespace MyWallet.Persistence
         }
     }
 }
+            

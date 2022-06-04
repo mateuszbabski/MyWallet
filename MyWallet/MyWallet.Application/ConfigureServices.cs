@@ -25,8 +25,8 @@ namespace MyWallet.Application
             services.AddScoped<IValidator<CreateTransactionCommand>, CreateTransactionCommandValidator>();
             services.AddScoped<IValidator<UpdateTransactionCommand>, UpdateTransactionCommandValidator>();
 
-
             return services;
         }
     }
 }
+

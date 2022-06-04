@@ -10,7 +10,6 @@ namespace MyWallet.Application.Wrappers
     {
         public List<T> Items { get; set; }
         public string SearchPhrase { get; set; }
-
         public int TotalPages { get; set; }
         public int PageNumber { get; set; } = 1;
         public int PageSize { get; set; }
@@ -39,6 +38,7 @@ namespace MyWallet.Application.Wrappers
         }
     }
 }
+
 
 
 
