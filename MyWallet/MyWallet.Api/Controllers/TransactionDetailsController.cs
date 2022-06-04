@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MyWallet.Application.Features.Transactions.Queries.GetAllTransactions;
-using MyWallet.Application.Features.Transactions.Queries.GetAllTransactionsPaginated;
+
 using MyWallet.Application.Features.Transactions.Queries.GetTransactionsBySearch;
 using MyWallet.Application.Wrappers;
 
@@ -18,16 +18,6 @@ namespace MyWallet.Api.Controllers
             _mediator = mediator;
         }
 
-        //[HttpGet(Name = "PaginatedResult")]
-        //public async Task<ActionResult<PaginatedList<TransactionInListViewModel>>> GetPaginatedTransactionsAsync([FromQuery]int page, [FromQuery]int pageSize)
-        //{
-        //    var transactionList = await _mediator.Send(new GetAllTransactionsPaginatedQuery()
-        //    {
-        //        PageNumber = page,
-        //        PageSize = pageSize
-        //    });
-        //    return Ok(transactionList);
-        //}
         [HttpGet(Name = "ResultBySearchQuery")]
         public async Task<ActionResult<PaginatedList<TransactionInListViewModel>>> GetTransactionsBySearchAsync([FromQuery] RequestParams request)
         {
@@ -41,4 +31,7 @@ namespace MyWallet.Api.Controllers
         }
     }
 }
+       
+        
+                
                 

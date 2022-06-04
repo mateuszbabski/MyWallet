@@ -1,12 +1,15 @@
 ﻿
 using AutoMapper;
 using MediatR;
+using MyWallet.Application.Enums;
 using MyWallet.Application.Features.Transactions.Queries.GetAllTransactions;
 using MyWallet.Application.Interfaces;
 using MyWallet.Application.Wrappers;
+using MyWallet.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,7 +33,7 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionsBySe
         public async Task<PaginatedList<TransactionInListViewModel>> Handle(GetTransactionsBySearchQuery request,
             CancellationToken cancellationToken)
         {
-            var budget = await _budgetRepository.GetByIdAsync(request.BudgetId);
+            var budget = await _budgetRepository.GetBudgetByIdAsync(request.BudgetId);
             var transactions = await _transactionRepository.GetTransactionsBySearchAsync(request.SearchPhrase);
 
             var transactionsPaged = transactions
@@ -44,11 +47,13 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionsBySe
             var result = new PaginatedList<TransactionInListViewModel>(transactionDto, count, request.PageNumber, request.PageSize);
 
             return result;
-
-
         }
-
-
     }
-
 }
+
+
+
+
+
+            
+

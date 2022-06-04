@@ -4,7 +4,7 @@ using MyWallet.Application.Features.Transactions.Commands.CreateTransaction;
 using MyWallet.Application.Features.Transactions.Commands.DeleteTransaction;
 using MyWallet.Application.Features.Transactions.Commands.UpdateTransaction;
 using MyWallet.Application.Features.Transactions.Queries.GetAllTransactions;
-using MyWallet.Application.Features.Transactions.Queries.GetAllTransactionsPaginated;
+
 using MyWallet.Application.Features.Transactions.Queries.GetTransactionById;
 using MyWallet.Application.Wrappers;
 using MyWallet.Domain.Entities;

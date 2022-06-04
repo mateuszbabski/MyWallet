@@ -20,4 +20,8 @@
     <ProjectReference Include="..\MyWallet.Domain\MyWallet.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Transactions\Queries\GetTransactionsByDate\" />
+  </ItemGroup>
+
 </Project>

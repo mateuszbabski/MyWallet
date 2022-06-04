@@ -36,10 +36,10 @@ namespace MyWallet.Persistence.Repositories
 
             return await _dbContext
                 .Budgets
-                .Include(t => t.Transactions)
+                .Include(t => t.Transactions.OrderByDescending(x => x.TransactionDate).Take(5))
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
-
+                
         public async Task UpdateBudgetAsync(Budget budget)
         {
             await _dbContext.SaveChangesAsync();
@@ -60,6 +60,7 @@ namespace MyWallet.Persistence.Repositories
 
     }
 }
+
             
 
        

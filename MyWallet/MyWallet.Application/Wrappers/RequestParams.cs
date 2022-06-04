@@ -10,6 +10,9 @@ namespace MyWallet.Application.Wrappers
     public class RequestParams
     {
         public string? SearchPhrase { get; set; }
+        public int BudgetId { get; set; }
+        //public DateTime? DateFrom { get; set; }
+        //public DateTime? DateTo { get; set; }
 
         const int maxPageSize = 25;
         public int PageNumber { get; set; } = 1;
