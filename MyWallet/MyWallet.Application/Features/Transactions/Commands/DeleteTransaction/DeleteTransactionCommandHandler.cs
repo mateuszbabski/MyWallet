@@ -22,11 +22,11 @@ namespace MyWallet.Application.Features.Transactions.Commands.DeleteTransaction
         public async Task<Unit> Handle(DeleteTransactionCommand request, CancellationToken cancellationToken)
         {
             var budget = await _budgetRepository.GetByIdAsync(request.BudgetId);
-            //var transaction = await _transactionRepository.GetByIdAsync(budget, request.Id);
-            var transaction = await _transactionRepository.GetByIdAsync(request.Id);
+            var transaction = await _transactionRepository.GetTransactionByIdAsync(request.Id);
 
-            await _transactionRepository.DeleteAsync(transaction);
+            await _transactionRepository.DeleteTransactionAsync(transaction);
             return Unit.Value;
         }
     }
 }
+            

@@ -25,7 +25,7 @@ namespace MyWallet.Application.Features.Transactions.Commands.CreateTransaction
 
         public async Task<int> Handle(CreateTransactionCommand request, CancellationToken cancellationToken)
         {
-            var budget = await _budgetRepository.GetByIdAsync(request.BudgetId);
+            var budget = await _budgetRepository.GetBudgetByIdAsync(request.BudgetId);
 
             var validator = new CreateTransactionCommandValidator();
             var validatorResult = await validator.ValidateAsync(request);
@@ -36,7 +36,7 @@ namespace MyWallet.Application.Features.Transactions.Commands.CreateTransaction
             var transaction = _mapper.Map<Transaction>(request);
             transaction.BudgetId = budget.Id;
 
-            await _transactionRepository.AddAsync(transaction);
+            await _transactionRepository.AddTransactionAsync(transaction);
 
             return transaction.Id;
             

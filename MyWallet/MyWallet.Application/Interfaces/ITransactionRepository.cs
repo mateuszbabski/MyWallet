@@ -12,11 +12,11 @@ namespace MyWallet.Application.Interfaces
 {
     public interface ITransactionRepository : IAsyncRepository<Transaction>
     {
-        //Task<IEnumerable<TransactionInListViewModel>> GetAllTransactionsAsync(Budget budget);
-        //Task<TransactionViewModel> GetTransactionByIdAsync(Budget budget, int id);
-        //Task DeleteTransactionAsync(TransactionViewModel transaction);
-        //Task<int> AddTransactionAsync(Transaction transaction);
-        //Task UpdateTransactionAsync(Transaction transaction);
+        Task<IEnumerable<Transaction>> GetAllTransactionsAsync();
+        Task<Transaction> GetTransactionByIdAsync(int id);
+        Task DeleteTransactionAsync(Transaction transaction);
+        Task<int> AddTransactionAsync(Transaction transaction);
+        Task UpdateTransactionAsync(Transaction transaction);
 
     }
 }

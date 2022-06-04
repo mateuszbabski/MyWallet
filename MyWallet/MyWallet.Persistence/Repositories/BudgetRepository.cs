@@ -42,10 +42,8 @@ namespace MyWallet.Persistence.Repositories
 
         public async Task UpdateBudgetAsync(Budget budget)
         {
-            //_dbContext.Entry(budget).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
         }
-
         public async Task DeleteBudgetAsync(Budget budget)
         {
             _dbContext.Budgets.Remove(budget);
@@ -62,6 +60,8 @@ namespace MyWallet.Persistence.Repositories
 
     }
 }
+            
+
        
 
 

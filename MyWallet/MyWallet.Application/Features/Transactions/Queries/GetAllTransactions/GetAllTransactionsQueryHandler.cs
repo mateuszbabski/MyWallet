@@ -29,11 +29,11 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetAllTransactions
             CancellationToken cancellationToken)
         {
             var budget = await _budgetRepository.GetByIdAsync(request.BudgetId);
-            //var transactions = await _transactionRepository.GetAllAsync(budget);
-            var transactions = await _transactionRepository.GetAllAsync();
+            var transactions = await _transactionRepository.GetAllTransactionsAsync();
 
             return _mapper.Map<IEnumerable<TransactionInListViewModel>>(transactions);
         }
     }
 }
+            
 

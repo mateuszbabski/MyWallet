@@ -23,9 +23,9 @@ namespace MyWallet.Application.Features.Budgets.Queries.GetAllBudgets
 
         public async Task<IEnumerable<BudgetInListViewModel>> Handle(GetAllBudgetsQuery request, CancellationToken cancellationToken)
         {
-            var all = await _budgetRepository.GetAllAsync();
+            var allBudgets = await _budgetRepository.GetAllBudgetsAsync();
             
-            return _mapper.Map<List<BudgetInListViewModel>>(all);
+            return _mapper.Map<List<BudgetInListViewModel>>(allBudgets);
         }
     }
 }
