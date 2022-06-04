@@ -17,6 +17,8 @@ namespace MyWallet.Application.Interfaces
         Task DeleteTransactionAsync(Transaction transaction);
         Task<int> AddTransactionAsync(Transaction transaction);
         Task UpdateTransactionAsync(Transaction transaction);
+        Task<IEnumerable<Transaction>> GetPaginatedTransactionsAsync();
+        Task<IEnumerable<Transaction>> GetTransactionsBySearchAsync(string searchPhrase);
 
     }
 }

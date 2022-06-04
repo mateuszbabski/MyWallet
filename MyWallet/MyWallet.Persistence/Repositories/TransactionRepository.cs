@@ -28,6 +28,48 @@ namespace MyWallet.Persistence.Repositories
                 .OrderByDescending(t => t.TransactionDate)
                 .ToListAsync();
         }
+        public async Task<IEnumerable<Transaction>> GetPaginatedTransactionsAsync()
+        {
+            return await _dbContext
+                .Transactions
+                .OrderByDescending(t => t.TransactionDate)
+                .ToListAsync();
+                
+        }
+        public async Task<IEnumerable<Transaction>> GetTransactionsBySearchAsync(string searchPhrase)
+        {
+            if (!string.IsNullOrEmpty(searchPhrase))
+            {
+                return await _dbContext
+                    .Transactions
+                    .Where(x => searchPhrase == null
+                                                     || (x.Category.ToLower().Contains(searchPhrase.ToLower())
+                                                     || x.Type.ToLower().Contains(searchPhrase.ToLower())))
+                    .OrderByDescending(t => t.TransactionDate)
+                    .ToListAsync();
+            }
+            return await _dbContext
+                .Transactions
+                .OrderByDescending(t => t.TransactionDate)
+                .ToListAsync();
+            //if(searchPhrase == null)
+            //{
+            //    return await _dbContext
+            //    .Transactions
+            //    .OrderByDescending(t => t.TransactionDate)
+            //    .ToListAsync();
+            //}
+            //else
+            //{
+            //    return await _dbContext
+            //        .Transactions
+            //        .Where(x => searchPhrase == null
+            //                                         || (x.Category.ToLower().Contains(searchPhrase.ToLower())
+            //                                         || x.Type.ToLower().Contains(searchPhrase.ToLower())))
+            //        .OrderByDescending(t => t.TransactionDate)
+            //        .ToListAsync();
+            //}
+        }
         public async Task<Transaction> GetTransactionByIdAsync(int id)
         {
             return await _dbContext
@@ -53,6 +95,9 @@ namespace MyWallet.Persistence.Repositories
         }
     }
 }
+
+
+
 
                 
                 
