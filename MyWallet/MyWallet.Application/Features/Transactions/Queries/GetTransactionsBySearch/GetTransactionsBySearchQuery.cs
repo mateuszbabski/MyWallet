@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using MyWallet.Application.Enums;
+
 using MyWallet.Application.Features.Transactions.Queries.GetAllTransactions;
 using MyWallet.Application.Wrappers;
 using System;
@@ -18,8 +18,8 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionsBySe
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
         
-        public string SortBy { get; set; }
-        public SortDirection SortDirection { get; set; }
+        //public string SortBy { get; set; }
+        //public SortDirection SortDirection { get; set; }
     }
 }
 

@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyWallet.Application.Features.Budgets.Commands.CreateBudget;
+using MyWallet.Application.Features.Budgets.Commands.UpdateBudget;
 using MyWallet.Application.Features.Transactions.Commands.CreateTransaction;
 using MyWallet.Application.Features.Transactions.Commands.UpdateTransaction;
 using MyWallet.Application.Interfaces;
@@ -22,6 +23,7 @@ namespace MyWallet.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddScoped<IValidator<CreateBudgetCommand>, CreateBudgetCommandValidator>();
+            services.AddScoped<IValidator<UpdateBudgetCommand>, UpdateBudgetCommandValidator>();
             services.AddScoped<IValidator<CreateTransactionCommand>, CreateTransactionCommandValidator>();
             services.AddScoped<IValidator<UpdateTransactionCommand>, UpdateTransactionCommandValidator>();
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using MyWallet.Application.Exceptions;
 using MyWallet.Application.Interfaces;
 using MyWallet.Domain.Entities;
 using System;
@@ -25,9 +26,10 @@ namespace MyWallet.Application.Features.Transactions.Commands.UpdateTransaction
 
         public async Task<Unit> Handle(UpdateTransactionCommand request, CancellationToken cancellationToken)
         {
-            var budget = await _budgetRepository.GetBudgetByIdAsync(request.BudgetId);
             var transaction = await _transactionRepository.GetTransactionByIdAsync(request.Id);
-            
+            if (transaction == null)
+                throw new NotFoundException("Transaction not found");
+
             transaction.BudgetId = request.BudgetId;
             transaction.Type = request.Type;
             transaction.Category = request.Category;
@@ -49,4 +51,5 @@ namespace MyWallet.Application.Features.Transactions.Commands.UpdateTransaction
         }
     }
 }
+            
 

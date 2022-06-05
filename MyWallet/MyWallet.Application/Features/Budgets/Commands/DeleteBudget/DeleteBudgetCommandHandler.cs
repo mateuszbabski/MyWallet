@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using MyWallet.Application.Exceptions;
 using MyWallet.Application.Interfaces;
 using MyWallet.Domain.Entities;
 using System;
@@ -24,6 +25,8 @@ namespace MyWallet.Application.Features.Budgets.Commands.DeleteBudget
         public async Task<Unit> Handle(DeleteBudgetCommand request, CancellationToken cancellationToken)
         {
             var budget = await _budgetRepository.GetBudgetByIdAsync(request.Id);
+            if (budget == null)
+                throw new NotFoundException("Budget not found");
 
             await _budgetRepository.DeleteBudgetAsync(budget);
             return Unit.Value;

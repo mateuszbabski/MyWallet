@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Application.Features.Budgets.Commands.CreateBudget
 {
-    public class CreateBudgetCommand : IRequest<int>
+    public class CreateBudgetCommand : IRequest<CreateBudgetCommandResponse>
     {
         //public int Id { get; set; }
         public string Name { get; set; }

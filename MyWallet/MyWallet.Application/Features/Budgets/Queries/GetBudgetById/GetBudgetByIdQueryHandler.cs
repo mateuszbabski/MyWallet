@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using MyWallet.Application.Exceptions;
 using MyWallet.Application.Interfaces;
 using MyWallet.Domain.Entities;
 using System;
@@ -24,7 +25,9 @@ namespace MyWallet.Application.Features.Budgets.Queries.GetBudgetById
         public async Task<BudgetViewModel> Handle(GetBudgetByIdQuery request, CancellationToken cancellationToken)
         {
             var budget = await _budgetRepository.GetBudgetByIdAsync(request.Id);
-            
+            if (budget == null)
+                throw new NotFoundException("Budget not found");
+
             return _mapper.Map<BudgetViewModel>(budget);
         }
     }
