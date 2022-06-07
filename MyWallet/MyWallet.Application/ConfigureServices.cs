@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using MediatR;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyWallet.Application.Features.Budgets.Commands.CreateBudget;
 using MyWallet.Application.Features.Budgets.Commands.UpdateBudget;
@@ -31,4 +30,5 @@ namespace MyWallet.Application
         }
     }
 }
+
 
