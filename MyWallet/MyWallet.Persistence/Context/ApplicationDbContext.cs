@@ -19,7 +19,7 @@ namespace MyWallet.Persistence.Context
 
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
-            return await base.SaveChangesAsync();
+            return await base.SaveChangesAsync(cancellationToken);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

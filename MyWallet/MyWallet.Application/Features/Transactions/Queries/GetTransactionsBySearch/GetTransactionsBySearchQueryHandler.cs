@@ -18,27 +18,23 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionsBySe
     public class GetTransactionsBySearchQueryHandler : IRequestHandler<GetTransactionsBySearchQuery, PaginatedList<TransactionInListViewModel>>
     {
         private readonly ITransactionRepository _transactionRepository;
-        private readonly IBudgetRepository _budgetRepository;
         private readonly IMapper _mapper;
         
+        
         public GetTransactionsBySearchQueryHandler(ITransactionRepository transactionRepository,
-            IBudgetRepository budgetRepository,
             IMapper mapper)
+            
         {
             _transactionRepository = transactionRepository;
-            _budgetRepository = budgetRepository;
             _mapper = mapper;
         }
+            
 
         public async Task<PaginatedList<TransactionInListViewModel>> Handle(GetTransactionsBySearchQuery request,
             CancellationToken cancellationToken)
         {
             var transactions = await _transactionRepository.GetTransactionsBySearchAsync(request.SearchPhrase, request.PageNumber, request.PageSize);
-            //var transactionsPaged = transactions
-            //    .Skip((request.PageNumber - 1) * request.PageSize)
-            //    .Take(request.PageSize)
-            //    .ToList();
-
+            
             var count = transactions.Count();
 
             var transactionDto = _mapper.Map<List<TransactionInListViewModel>>(transactions);
@@ -48,6 +44,7 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionsBySe
         }
     }
 }
+
             
 
 

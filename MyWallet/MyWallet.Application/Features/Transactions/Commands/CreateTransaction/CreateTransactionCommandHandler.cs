@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Application.Features.Transactions.Commands.CreateTransaction
 {
-    public class CreateTransactionCommandHandler : IRequestHandler<CreateTransactionCommand, int>
+    public class CreateTransactionCommandHandler : IRequestHandler<CreateTransactionCommand, CreateTransactionCommandResponse>
     {
         private readonly IBudgetRepository _budgetRepository;
         private readonly ITransactionRepository _transactionRepository;
@@ -23,20 +23,20 @@ namespace MyWallet.Application.Features.Transactions.Commands.CreateTransaction
             _mapper = mapper;
         }
 
-        public async Task<int> Handle(CreateTransactionCommand request, CancellationToken cancellationToken)
+        public async Task<CreateTransactionCommandResponse> Handle(CreateTransactionCommand request, CancellationToken cancellationToken)
         {
             var validator = new CreateTransactionCommandValidator();
             var validatorResult = await validator.ValidateAsync(request);
 
             if (!validatorResult.IsValid)
-                throw new Exception("Not validated");
+                return new CreateTransactionCommandResponse(validatorResult);
 
             var transaction = _mapper.Map<Transaction>(request);
             transaction.BudgetId = request.BudgetId;
 
             await _transactionRepository.AddTransactionAsync(transaction);
 
-            return transaction.Id;
+            return new CreateTransactionCommandResponse(transaction.Id);
             
         }
     }

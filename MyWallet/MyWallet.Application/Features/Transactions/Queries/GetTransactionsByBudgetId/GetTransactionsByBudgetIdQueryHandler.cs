@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using MyWallet.Application.Exceptions;
 using MyWallet.Application.Features.Transactions.Queries.GetAllTransactions;
 using MyWallet.Application.Interfaces;
 using MyWallet.Application.Wrappers;
@@ -15,23 +16,23 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionsByBu
         public class GetTransactionsByBudgetIdQueryHandler : IRequestHandler<GetTransactionsByBudgetIdQuery, PaginatedList<TransactionInListViewModel>>
         {
             private readonly ITransactionRepository _transactionRepository;
-            private readonly IBudgetRepository _budgetRepository;
             private readonly IMapper _mapper;
+            
 
             public GetTransactionsByBudgetIdQueryHandler(ITransactionRepository transactionRepository,
-                IBudgetRepository budgetRepository,
                 IMapper mapper)
+                
             {
                 _transactionRepository = transactionRepository;
-                _budgetRepository = budgetRepository;
                 _mapper = mapper;
             }
 
+                
             public async Task<PaginatedList<TransactionInListViewModel>> Handle(GetTransactionsByBudgetIdQuery request,
                 CancellationToken cancellationToken)
             {
                 var transactions = await _transactionRepository.GetTransactionsByBudgetIdAsync(request.SearchPhrase, request.BudgetId, request.PageNumber, request.PageSize);
-
+                
                 var count = transactions.Count();
 
                 var transactionDto = _mapper.Map<List<TransactionInListViewModel>>(transactions);
@@ -41,6 +42,7 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionsByBu
             }
         }
     }
+
                 
                 
 

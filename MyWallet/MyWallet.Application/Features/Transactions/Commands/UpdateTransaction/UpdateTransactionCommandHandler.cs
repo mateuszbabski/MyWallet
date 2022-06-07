@@ -13,13 +13,13 @@ namespace MyWallet.Application.Features.Transactions.Commands.UpdateTransaction
 {
     public class UpdateTransactionCommandHandler : IRequestHandler<UpdateTransactionCommand>
     {
-        private readonly IBudgetRepository _budgetRepository;
+        
         private readonly ITransactionRepository _transactionRepository;
         private readonly IMapper _mapper;
 
-        public UpdateTransactionCommandHandler(IBudgetRepository budgetRepository, ITransactionRepository transactionRepository, IMapper mapper)
+        public UpdateTransactionCommandHandler(ITransactionRepository transactionRepository, IMapper mapper)
         {
-            _budgetRepository = budgetRepository;
+            
             _transactionRepository = transactionRepository;
             _mapper = mapper;
         }
@@ -41,7 +41,7 @@ namespace MyWallet.Application.Features.Transactions.Commands.UpdateTransaction
             var validatorResult = await validator.ValidateAsync(request);
 
             if (!validatorResult.IsValid)
-                throw new Exception("Not validated");
+                throw new ValidationException();
 
             var transactionDto = _mapper.Map<Transaction>(transaction);
 

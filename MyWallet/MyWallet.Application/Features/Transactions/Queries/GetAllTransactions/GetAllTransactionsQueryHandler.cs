@@ -13,18 +13,18 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetAllTransactions
     public class GetAllTransactionsQueryHandler : IRequestHandler<GetAllTransactionsQuery, IEnumerable<TransactionInListViewModel>>
     {
         private readonly ITransactionRepository _transactionRepository;
-        private readonly IBudgetRepository _budgetRepository;
         private readonly IMapper _mapper;
+        
 
         public GetAllTransactionsQueryHandler(ITransactionRepository transactionRepository, 
-            IBudgetRepository budgetRepository, 
             IMapper mapper)
+            
         {
             _transactionRepository = transactionRepository;
-            _budgetRepository = budgetRepository;
             _mapper = mapper;
         }
 
+            
         public async Task<IEnumerable<TransactionInListViewModel>> Handle(GetAllTransactionsQuery request, 
             CancellationToken cancellationToken)
         {

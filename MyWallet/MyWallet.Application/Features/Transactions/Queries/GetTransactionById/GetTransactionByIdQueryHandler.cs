@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using MyWallet.Application.Exceptions;
 using MyWallet.Application.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,18 +14,21 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionById
     {
         private readonly ITransactionRepository _transactionRepository;
         private readonly IMapper _mapper;
-        private readonly IBudgetRepository _budgetRepository;
+        
 
-        public GetTransactionByIdQueryHandler(ITransactionRepository transactionRepository, IMapper mapper, IBudgetRepository budgetRepository)
+        public GetTransactionByIdQueryHandler(ITransactionRepository transactionRepository, 
+            IMapper mapper)
         {
             _transactionRepository = transactionRepository;
             _mapper = mapper;
-            _budgetRepository = budgetRepository;
+            
         }
 
         public async Task<TransactionViewModel> Handle(GetTransactionByIdQuery request, CancellationToken cancellationToken)
         {
             var transaction = await _transactionRepository.GetTransactionByIdAsync(request.Id);
+            if(transaction is null)
+                throw new NotFoundException("Transaction not found");
 
             return _mapper.Map<TransactionViewModel>(transaction);
         }

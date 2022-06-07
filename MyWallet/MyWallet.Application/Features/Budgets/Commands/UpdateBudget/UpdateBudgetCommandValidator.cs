@@ -14,7 +14,7 @@ namespace MyWallet.Application.Features.Budgets.Commands.UpdateBudget
             RuleFor(p => p.Name)
                 .NotEmpty()
                 .NotNull()
-                .WithMessage("Name cant be empty");
+                .WithMessage("Name can't be empty");
             RuleFor(p => p.Description)
                 .MaximumLength(100);
         }

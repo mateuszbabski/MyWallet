@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FluentValidation;
 using MediatR;
 using MyWallet.Application.Exceptions;
 using MyWallet.Application.Interfaces;
@@ -9,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace MyWallet.Application.Features.Budgets.Commands.UpdateBudget
 {
@@ -31,13 +31,13 @@ namespace MyWallet.Application.Features.Budgets.Commands.UpdateBudget
             budget.Name = request.Name;
             budget.Description = request.Description;
 
-            //var validator = new UpdateBudgetCommandValidator();
-            //var validatorResult = await validator.ValidateAsync(request);
+            var validator = new UpdateBudgetCommandValidator();
+            var validatorResult = await validator.ValidateAsync(request);
 
-            //if (!validatorResult.IsValid)
-                //    return new UpdateBudgetCommandResponse(validatorResult);
+            if (!validatorResult.IsValid)
+                throw new ValidationException();
 
-                var newBudget = _mapper.Map<Budget>(budget);
+            var newBudget = _mapper.Map<Budget>(budget);
             await _budgetRepository.UpdateBudgetAsync(newBudget);
 
             return Unit.Value;
