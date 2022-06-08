@@ -31,12 +31,6 @@ namespace MyWallet.Application.Features.Budgets.Commands.UpdateBudget
             budget.Name = request.Name;
             budget.Description = request.Description;
 
-            var validator = new UpdateBudgetCommandValidator();
-            var validatorResult = await validator.ValidateAsync(request);
-
-            if (!validatorResult.IsValid)
-                throw new ValidationException();
-
             var newBudget = _mapper.Map<Budget>(budget);
             await _budgetRepository.UpdateBudgetAsync(newBudget);
 
@@ -44,5 +38,6 @@ namespace MyWallet.Application.Features.Budgets.Commands.UpdateBudget
         }
     }
 }
+        
 
             

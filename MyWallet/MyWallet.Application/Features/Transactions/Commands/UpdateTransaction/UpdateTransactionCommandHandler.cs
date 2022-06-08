@@ -37,12 +37,6 @@ namespace MyWallet.Application.Features.Transactions.Commands.UpdateTransaction
             transaction.Description = request.Description;
             transaction.TransactionDate = request.TransactionDate;
 
-            var validator = new UpdateTransactionCommandValidator();
-            var validatorResult = await validator.ValidateAsync(request);
-
-            if (!validatorResult.IsValid)
-                throw new ValidationException();
-
             var transactionDto = _mapper.Map<Transaction>(transaction);
 
             await _transactionRepository.UpdateTransactionAsync(transactionDto);
@@ -51,5 +45,7 @@ namespace MyWallet.Application.Features.Transactions.Commands.UpdateTransaction
         }
     }
 }
+       
+
             
 

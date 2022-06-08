@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Application.Features.Transactions.Commands.CreateTransaction
 {
-    public class CreateTransactionCommand : IRequest<CreateTransactionCommandResponse>
+    public class CreateTransactionCommand : IRequest<int>
     {
         
         public int BudgetId { get; set; }
