@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyWallet.Application.Features.Transactions.Queries.GetAllTransactions;
 using MyWallet.Application.Features.Transactions.Queries.GetTransactionsByBudgetId;
@@ -8,6 +9,7 @@ namespace MyWallet.Api.Controllers
 {
     [Route("api/[controller]/")]
     [ApiController]
+    [Authorize]
     public class TransactionsByBudgetId : ControllerBase
     {
         private readonly IMediator _mediator;

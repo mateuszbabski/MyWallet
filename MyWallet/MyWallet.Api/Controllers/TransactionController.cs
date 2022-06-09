@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyWallet.Application.Features.Transactions.Commands.CreateTransaction;
 using MyWallet.Application.Features.Transactions.Commands.DeleteTransaction;
@@ -13,6 +14,7 @@ namespace MyWallet.Api.Controllers
 {
     [Route("api/[controller]/")]
     [ApiController]
+    [Authorize]
     public class TransactionController : ControllerBase
     {
         private readonly IMediator _mediator;

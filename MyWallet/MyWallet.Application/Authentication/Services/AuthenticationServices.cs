@@ -54,13 +54,14 @@ namespace MyWallet.Application.Authentication.Services
             var isEmailInUse = await _userRepository.GetUserByEmailAsync(request.Email);
             if (isEmailInUse != null)
             {
-                throw new BadRequestException("Email is already in use");
+                return new AuthenticationResponse { Errors = new[] { "Email is already in use" }};
             }
             var newUser = _mapper.Map<User>(request);
             await _userRepository.RegisterNewUserAsync(newUser);
-
+           
             return await GenerateAuthenticationResponseForUserAsync(newUser);
         }
+
 
         private Task<AuthenticationResponse> GenerateAuthenticationResponseForUserAsync(User user)
         {
