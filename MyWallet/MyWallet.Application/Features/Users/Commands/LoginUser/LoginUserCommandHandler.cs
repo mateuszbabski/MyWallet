@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Application.Features.Users.Commands.LoginUser
 {
-    public class LoginUserCommandHandler : IRequest<LoginUserCommand>
+    public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, AuthenticationResponse>
     {
         private readonly IAuthentication _authentication;
 
