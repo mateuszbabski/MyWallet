@@ -24,10 +24,7 @@ namespace MyWallet.Application
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-            //services.AddScoped<IValidator<CreateBudgetCommand>, CreateBudgetCommandValidator>();
-            //services.AddScoped<IValidator<UpdateBudgetCommand>, UpdateBudgetCommandValidator>();
-            //services.AddScoped<IValidator<CreateTransactionCommand>, CreateTransactionCommandValidator>();
-            //services.AddScoped<IValidator<UpdateTransactionCommand>, UpdateTransactionCommandValidator>();
+            
 
             return services;
         }

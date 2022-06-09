@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Application.Features.Users.Commands.LoginUser
 {
-    internal class LoginUserCommand
+    public class LoginUserCommand
     {
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }

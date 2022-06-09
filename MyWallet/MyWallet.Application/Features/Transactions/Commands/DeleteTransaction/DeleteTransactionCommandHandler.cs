@@ -11,12 +11,12 @@ namespace MyWallet.Application.Features.Transactions.Commands.DeleteTransaction
 {
     public class DeleteTransactionCommandHandler : IRequestHandler<DeleteTransactionCommand>
     {
-        private readonly IBudgetRepository _budgetRepository;
+        
         private readonly ITransactionRepository _transactionRepository;
 
-        public DeleteTransactionCommandHandler(IBudgetRepository budgetRepository, ITransactionRepository transactionRepository)
+        public DeleteTransactionCommandHandler(ITransactionRepository transactionRepository)
         {
-            _budgetRepository = budgetRepository;
+            
             _transactionRepository = transactionRepository;
         }
 

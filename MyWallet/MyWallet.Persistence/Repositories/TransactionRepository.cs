@@ -94,7 +94,7 @@ namespace MyWallet.Persistence.Repositories
 
         public async Task<int> AddTransactionAsync(Transaction transaction)
         {
-            await _dbContext.Set<Transaction>().AddAsync(transaction);
+            await _dbContext.Transactions.AddAsync(transaction);
             await _dbContext.SaveChangesAsync();
 
             return transaction.Id;

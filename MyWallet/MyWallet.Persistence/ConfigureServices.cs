@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyWallet.Application.Interfaces;
+using MyWallet.Domain.Entities;
 using MyWallet.Persistence.Context;
 using MyWallet.Persistence.Repositories;
 using System;
@@ -18,6 +20,8 @@ namespace MyWallet.Persistence
         {
             services.AddScoped<IBudgetRepository, BudgetRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
 
             return services;

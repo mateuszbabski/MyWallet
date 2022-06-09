@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Transactions\Queries\GetTransactionsByDate\" />
-    <Folder Include="Behaviours\" />
   </ItemGroup>
 
 </Project>

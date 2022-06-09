@@ -14,12 +14,12 @@ namespace MyWallet.Application.Features.Budgets.Commands.DeleteBudget
     public class DeleteBudgetCommandHandler : IRequestHandler<DeleteBudgetCommand>
     {
         private readonly IBudgetRepository _budgetRepository;
-        private readonly IMapper _mapper;
+        
 
-        public DeleteBudgetCommandHandler(IBudgetRepository budgetRepository, IMapper mapper)
+        public DeleteBudgetCommandHandler(IBudgetRepository budgetRepository)
         {
             _budgetRepository = budgetRepository;
-            _mapper = mapper;
+            
         }
 
         public async Task<Unit> Handle(DeleteBudgetCommand request, CancellationToken cancellationToken)

@@ -13,13 +13,13 @@ namespace MyWallet.Application.Features.Transactions.Commands.CreateTransaction
 {
     public class CreateTransactionCommandHandler : IRequestHandler<CreateTransactionCommand, int>
     {
-        private readonly IBudgetRepository _budgetRepository;
+        
         private readonly ITransactionRepository _transactionRepository;
         private readonly IMapper _mapper;
 
-        public CreateTransactionCommandHandler(IBudgetRepository budgetRepository, ITransactionRepository transactionRepository, IMapper mapper)
+        public CreateTransactionCommandHandler(ITransactionRepository transactionRepository, IMapper mapper)
         {
-            _budgetRepository = budgetRepository;
+            
             _transactionRepository = transactionRepository;
             _mapper = mapper;
         }
