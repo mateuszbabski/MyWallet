@@ -20,18 +20,10 @@ namespace MyWallet.Application.Features.Users.Commands.RegisterUser
                 .MinimumLength(6)
                 .WithMessage("Password is too short");
 
+            RuleFor(x => x.ConfirmPassword).Equal(x => x.Password).WithMessage("Password and confirm password are not the same");
 
-            RuleFor(x => x.ConfirmPassword).Equal(x => x.Password);
-
-            //RuleFor(x => x.Email)
-            //    .Custom((value, context) =>
-            //    {
-            //        var emailInUse = dbContext.Users.Any(e => e.Email == value);
-            //        if (emailInUse)
-            //        {
-            //            context.AddFailure("Email is taken");
-            //        }
-            //    });
         }
     }
 }
+           
+

@@ -8,7 +8,7 @@ using MyWallet.Application.Features.Transactions.Commands.UpdateTransaction;
 using MyWallet.Application.Features.Transactions.Queries.GetAllTransactions;
 using MyWallet.Application.Features.Transactions.Queries.GetTransactionById;
 using MyWallet.Application.Features.Users.Commands.RegisterUser;
-using MyWallet.Application.Features.Users.Queries;
+using MyWallet.Application.Features.Users.Queries.GetUserById;
 using MyWallet.Domain.Entities;
 using System;
 using System.Collections.Generic;

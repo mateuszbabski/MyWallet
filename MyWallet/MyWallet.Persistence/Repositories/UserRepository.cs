@@ -27,6 +27,7 @@ namespace MyWallet.Persistence.Repositories
 
         public async Task<int> RegisterNewUserAsync(User user)
         {
+            
             var newUser = new User()
             {
                 FirstName = user.FirstName,
@@ -41,13 +42,21 @@ namespace MyWallet.Persistence.Repositories
 
             return newUser.Id;
         }
-
         public async Task<User> GetUserByIdAsync(int id)
         {
             return await _dbContext
                 .Users
                 .FirstOrDefaultAsync(x => x.Id == id);
-                
+        }
+
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            return await _dbContext
+                .Users
+                .FirstOrDefaultAsync(x => x.Email == email);
         }
     }
 }
+
+
+                

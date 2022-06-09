@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyWallet.Application.Features.Users.Queries
+namespace MyWallet.Application.Features.Users.Queries.GetUserById
 {
     public class GetUserByIdQuery : IRequest<UserViewModel>
     {

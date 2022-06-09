@@ -1,7 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using MyWallet.Application.Features.Users.Commands.LoginUser;
 using MyWallet.Application.Features.Users.Commands.RegisterUser;
-using MyWallet.Application.Features.Users.Queries;
+using MyWallet.Application.Features.Users.Queries.GetUserById;
 
 namespace MyWallet.Api.Controllers
 {
@@ -15,12 +16,21 @@ namespace MyWallet.Api.Controllers
         {
             _mediator = mediator;
         }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<int>> LoginUser([FromBody] LoginUserCommand command)
+        {
+            var user = await _mediator.Send(command);
+            return Ok(user);
+        }
+
         [HttpPost("register")]
         public async Task<ActionResult<int>> RegisterNewUser([FromBody] RegisterUserCommand command)
         {
             var newUser = await _mediator.Send(command);
             return Ok(newUser);
         }
+
         [HttpGet("{id}", Name = "GetUserById")]
         public async Task<ActionResult<UserViewModel>> GetUserById(int id)
         {

@@ -12,5 +12,6 @@ namespace MyWallet.Application.Interfaces
     {
         Task<int> RegisterNewUserAsync(User user);
         Task<User> GetUserByIdAsync(int id);
+        Task<User> GetUserByEmailAsync(string email);
     }
 }

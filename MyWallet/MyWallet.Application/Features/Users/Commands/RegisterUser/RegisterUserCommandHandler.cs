@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using MyWallet.Application.Authentication.Responses;
 using MyWallet.Application.Interfaces;
 using MyWallet.Domain.Entities;
 using System;
@@ -10,23 +11,23 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Application.Features.Users.Commands.RegisterUser
 {
-    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand>
+    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, AuthenticationResponse>
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IMapper _mapper;
+       
+        private readonly IAuthentication _authentication;
 
-        public RegisterUserCommandHandler(IUserRepository userRepository, IMapper mapper)
+
+        public RegisterUserCommandHandler(IAuthentication authentication)
         {
-            _userRepository = userRepository;
-            _mapper = mapper;
+            _authentication = authentication;
         }
 
-        public async Task<Unit> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
-        {
-            var newUser = _mapper.Map<User>(request);
-            await _userRepository.RegisterNewUserAsync(newUser);
+            
 
-            return Unit.Value;
+        public async Task<AuthenticationResponse> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        {
+            return await _authentication.RegisterAsync(request);
         }
     }
 }
+

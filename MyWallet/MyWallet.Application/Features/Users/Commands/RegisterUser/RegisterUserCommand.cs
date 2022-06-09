@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MyWallet.Application.Authentication.Responses;
 using MyWallet.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Application.Features.Users.Commands.RegisterUser
 {
-    public class RegisterUserCommand : IRequest
+    public class RegisterUserCommand : IRequest<AuthenticationResponse>
     {
         public string FirstName { get; set; }
         public string Email { get; set; }
