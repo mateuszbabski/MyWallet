@@ -5,10 +5,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MyWallet.Persistence.Migrations
 {
-    public partial class SqlInit : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Budgets",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedById = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Budgets", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
@@ -26,42 +41,18 @@ namespace MyWallet.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Budgets",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Budgets", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Budgets_Users_UserID",
-                        column: x => x.UserID,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Transactions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedById = table.Column<int>(type: "int", nullable: false),
                     BudgetId = table.Column<int>(type: "int", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Value = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -75,11 +66,6 @@ namespace MyWallet.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Budgets_UserID",
-                table: "Budgets",
-                column: "UserID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Transactions_BudgetId",
                 table: "Transactions",
                 column: "BudgetId");
@@ -91,10 +77,10 @@ namespace MyWallet.Persistence.Migrations
                 name: "Transactions");
 
             migrationBuilder.DropTable(
-                name: "Budgets");
+                name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Budgets");
         }
     }
 }

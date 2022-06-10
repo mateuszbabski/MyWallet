@@ -11,9 +11,10 @@ namespace MyWallet.Application.Features.Budgets.Commands.CreateBudget
     public class CreateBudgetCommand : IRequest<int>
     {
         //public int Id { get; set; }
+        public int? UserId { get; set; }
         public string Name { get; set; }
         public string? Description { get; set; }
-        //public int UserId { get; set; }
+        
     }
 }
 

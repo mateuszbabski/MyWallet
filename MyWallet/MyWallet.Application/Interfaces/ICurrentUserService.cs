@@ -10,6 +10,6 @@ namespace MyWallet.Application.Interfaces
     public interface ICurrentUserService
     {
         ClaimsPrincipal User { get; }
-        int? GetUserId { get; }
+        int GetUserId { get; }
     }
 }

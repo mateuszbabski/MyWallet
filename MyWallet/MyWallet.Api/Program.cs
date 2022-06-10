@@ -1,30 +1,28 @@
-using FluentValidation;
-using MediatR;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using MyWallet.Api.Services;
 using MyWallet.Application;
 using MyWallet.Application.Authentication.Settings;
-using MyWallet.Application.Features.Budgets.Commands.CreateBudget;
-using MyWallet.Application.Features.Transactions.Commands.CreateTransaction;
+
 using MyWallet.Application.Interfaces;
 using MyWallet.Persistence;
 using MyWallet.Persistence.Context;
-using MyWallet.Persistence.Repositories;
-using Swashbuckle.Swagger;
-using System.Reflection;
+
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")));
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//                options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")));
 
 var jwtSettings = new JWTSettings();
 
-builder.Configuration.Bind(nameof(jwtSettings), jwtSettings);
+
+builder.Configuration.GetSection("Authentication").Bind(jwtSettings);
 builder.Services.AddSingleton(jwtSettings);
 
 
@@ -41,10 +39,14 @@ builder.Services.AddAuthentication(opt =>
         cfg.TokenValidationParameters = new TokenValidationParameters
         {
             ValidIssuer = jwtSettings.Issuer,
-            ValidAudience = jwtSettings.Issuer,
+            ValidAudience = jwtSettings.Audience,
+            ValidateIssuer = false,
+            ValidateAudience = false,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
         };
     });
+
+
 
 builder.Services.AddApplicationCore();
 builder.Services.AddInfrastructure(builder.Configuration);
@@ -53,7 +55,8 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddControllers();
 
-
+builder.Services.AddSingleton<ICurrentUserService, CurrentUserService>();
+builder.Services.AddHttpContextAccessor();
 
 
 
@@ -101,6 +104,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

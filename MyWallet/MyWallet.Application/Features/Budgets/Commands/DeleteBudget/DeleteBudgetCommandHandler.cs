@@ -14,17 +14,18 @@ namespace MyWallet.Application.Features.Budgets.Commands.DeleteBudget
     public class DeleteBudgetCommandHandler : IRequestHandler<DeleteBudgetCommand>
     {
         private readonly IBudgetRepository _budgetRepository;
-        
+        private readonly ICurrentUserService _userService;
 
-        public DeleteBudgetCommandHandler(IBudgetRepository budgetRepository)
+        public DeleteBudgetCommandHandler(IBudgetRepository budgetRepository, ICurrentUserService userService)
         {
             _budgetRepository = budgetRepository;
-            
+            _userService = userService;
         }
 
         public async Task<Unit> Handle(DeleteBudgetCommand request, CancellationToken cancellationToken)
         {
-            var budget = await _budgetRepository.GetBudgetByIdAsync(request.Id);
+            var creatorId =  _userService.GetUserId;
+            var budget = await _budgetRepository.GetBudgetByIdAsync(request.Id, creatorId);
             if (budget == null)
                 throw new NotFoundException("Budget not found");
 

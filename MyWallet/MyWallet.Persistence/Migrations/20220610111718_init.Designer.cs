@@ -12,8 +12,8 @@ using MyWallet.Persistence.Context;
 namespace MyWallet.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220602063628_INIT4")]
-    partial class INIT4
+    [Migration("20220610111718_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,9 @@ namespace MyWallet.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -39,12 +42,7 @@ namespace MyWallet.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Budgets");
                 });
@@ -63,6 +61,9 @@ namespace MyWallet.Persistence.Migrations
                     b.Property<string>("Category")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -114,32 +115,18 @@ namespace MyWallet.Persistence.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("MyWallet.Domain.Entities.Budget", b =>
-                {
-                    b.HasOne("MyWallet.Domain.Entities.User", null)
-                        .WithMany("Budgets")
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("MyWallet.Domain.Entities.Transaction", b =>
                 {
-                    b.HasOne("MyWallet.Domain.Entities.Budget", "Budget")
+                    b.HasOne("MyWallet.Domain.Entities.Budget", null)
                         .WithMany("Transactions")
                         .HasForeignKey("BudgetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Budget");
                 });
 
             modelBuilder.Entity("MyWallet.Domain.Entities.Budget", b =>
                 {
                     b.Navigation("Transactions");
-                });
-
-            modelBuilder.Entity("MyWallet.Domain.Entities.User", b =>
-                {
-                    b.Navigation("Budgets");
                 });
 #pragma warning restore 612, 618
         }

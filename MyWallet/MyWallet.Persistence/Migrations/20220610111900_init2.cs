@@ -4,7 +4,7 @@
 
 namespace MyWallet.Persistence.Migrations
 {
-    public partial class userDB : Migration
+    public partial class init2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

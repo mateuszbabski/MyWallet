@@ -10,7 +10,7 @@ namespace MyWallet.Domain.Entities
     public class Transaction 
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public int CreatedById { get; set; }
         public int BudgetId { get; set; }
         public string Type { get; set; }
         public string Category { get; set; }

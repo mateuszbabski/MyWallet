@@ -11,4 +11,5 @@ namespace MyWallet.Application.Features.Budgets.Queries.GetBudgetById
     {
         public int Id { get; set; }
     }
+        
 }

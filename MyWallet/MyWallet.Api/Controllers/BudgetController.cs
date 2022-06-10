@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MyWallet.Api.Services;
 using MyWallet.Application.Features.Budgets.Commands.CreateBudget;
 using MyWallet.Application.Features.Budgets.Commands.DeleteBudget;
 using MyWallet.Application.Features.Budgets.Commands.UpdateBudget;
@@ -15,13 +16,15 @@ namespace MyWallet.Api.Controllers
     public class BudgetController : ControllerBase
     {
         private readonly IMediator _mediator;
+        
 
         public BudgetController(IMediator mediator)
         {
             _mediator = mediator;
+            
         }
 
-        // GetAll
+        
         [HttpGet(Name = "GetAllBudgets")]
         public async Task<ActionResult<IEnumerable<BudgetInListViewModel>>> GetAllBudgets()
         {
@@ -29,7 +32,8 @@ namespace MyWallet.Api.Controllers
             return Ok(budgetList);
         }
 
-        // GetById
+        
+        
         [HttpGet("{id}", Name = "GetBudgetById")]
         public async Task<ActionResult<BudgetViewModel>> GetBudgetById(int id)
         {
@@ -41,15 +45,18 @@ namespace MyWallet.Api.Controllers
         }
 
 
-        // Add
+        
+        
         [HttpPost(Name = "AddBudget")]
         public async Task<ActionResult<int>> CreateBudget([FromBody] CreateBudgetCommand createBudgetCommand)
         {
             var budget = await _mediator.Send(createBudgetCommand);
             return Ok(budget);
         }
+        
+            
 
-        // Update
+        
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateBudget([FromBody] UpdateBudgetCommand updateBudgetCommand)
         {
@@ -57,7 +64,8 @@ namespace MyWallet.Api.Controllers
             return NoContent();
         }
 
-        // Delete
+        
+        
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteBudget(int id)
         {

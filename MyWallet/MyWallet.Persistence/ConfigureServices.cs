@@ -18,12 +18,16 @@ namespace MyWallet.Persistence
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("SQLServer")));
+
+            services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
+
             services.AddScoped<IBudgetRepository, BudgetRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
-
             return services;
         }
     }
