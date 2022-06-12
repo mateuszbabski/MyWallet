@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using MyWallet.Application.Authentication.Responses;
-using MyWallet.Application.Authentication.Settings;
-using MyWallet.Application.Exceptions;
+using MyWallet.Application.Authentication.Requests;
 using MyWallet.Application.Features.Users.Commands.LoginUser;
 using MyWallet.Application.Features.Users.Commands.RegisterUser;
+using MyWallet.Application.Features.Users.Commands.Responses;
 using MyWallet.Application.Interfaces;
 using MyWallet.Domain.Entities;
+using MyWallet.Identity.Settings;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -16,9 +16,9 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyWallet.Application.Authentication.Services
+namespace MyWallet.Identity.Services
 {
-    public class AuthenticationServices : IAuthentication
+    public class AuthenticationServices : IAuthenticationService
     {
         private readonly IUserRepository _userRepository;
         private readonly JWTSettings _jwtSettings;
@@ -35,13 +35,13 @@ namespace MyWallet.Application.Authentication.Services
         public async Task<AuthenticationResponse> LoginAsync(LoginUserCommand request)
         {
             var user = await _userRepository.GetUserByEmailAsync(request.Email);
-            if(user == null)
+            if (user == null)
             {
                 return new AuthenticationResponse { Errors = new[] { "Email or password incorrect" } };
             }
 
             var verifyPassword = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
-            if(verifyPassword == PasswordVerificationResult.Failed)
+            if (verifyPassword == PasswordVerificationResult.Failed)
             {
                 return new AuthenticationResponse { Errors = new[] { "Email or password incorrect" } };
             }
@@ -54,18 +54,18 @@ namespace MyWallet.Application.Authentication.Services
             var isEmailInUse = await _userRepository.GetUserByEmailAsync(request.Email);
             if (isEmailInUse != null)
             {
-                return new AuthenticationResponse { Errors = new[] { "Email is already in use" }};
+                return new AuthenticationResponse { Errors = new[] { "Email is already in use" } };
             }
             var newUser = _mapper.Map<User>(request);
             await _userRepository.RegisterNewUserAsync(newUser);
-           
+
             return await GenerateAuthenticationResponseForUserAsync(newUser);
         }
 
 
         private Task<AuthenticationResponse> GenerateAuthenticationResponseForUserAsync(User user)
         {
-            
+
             var jwtHandler = new JwtSecurityTokenHandler();
             var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtSettings.Key));
 
@@ -102,10 +102,6 @@ namespace MyWallet.Application.Authentication.Services
                 Token = jwtHandler.WriteToken(tokenDescriptor)
             });
         }
+        
     }
 }
-
-
-
-           
-

@@ -1,8 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using MyWallet.Application.Authentication.Services;
-using MyWallet.Application.Authentication.Settings;
 using MyWallet.Application.Behaviours;
 using MyWallet.Application.Features.Budgets.Commands.CreateBudget;
 using MyWallet.Application.Features.Budgets.Commands.UpdateBudget;
@@ -16,6 +14,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
 namespace MyWallet.Application
 {
     public static class ConfigureServices
@@ -27,13 +27,13 @@ namespace MyWallet.Application
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 
-            services.AddTransient<IAuthentication, AuthenticationServices>();
-
-            
-
             return services;
         }
     }
 }
+            
+
+            
+
 
 

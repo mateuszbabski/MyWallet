@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyWallet.Application.Authentication.Settings
+namespace MyWallet.Identity.Settings
 {
     public class JWTSettings
     {

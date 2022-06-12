@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using MyWallet.Application.Authentication.Responses;
+using MyWallet.Application.Features.Users.Commands.Responses;
 using MyWallet.Application.Interfaces;
 using MyWallet.Domain.Entities;
 using System;
@@ -14,10 +14,10 @@ namespace MyWallet.Application.Features.Users.Commands.RegisterUser
     public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, AuthenticationResponse>
     {
        
-        private readonly IAuthentication _authentication;
+        private readonly IAuthenticationService _authentication;
 
 
-        public RegisterUserCommandHandler(IAuthentication authentication)
+        public RegisterUserCommandHandler(IAuthenticationService authentication)
         {
             _authentication = authentication;
         }

@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using MyWallet.Application.Authentication.Responses;
+using MyWallet.Application.Features.Users.Commands.Responses;
 using MyWallet.Application.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,9 +11,9 @@ namespace MyWallet.Application.Features.Users.Commands.LoginUser
 {
     public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, AuthenticationResponse>
     {
-        private readonly IAuthentication _authentication;
+        private readonly IAuthenticationService _authentication;
 
-        public LoginUserCommandHandler(IAuthentication authentication)
+        public LoginUserCommandHandler(IAuthenticationService authentication)
         {
             _authentication = authentication;
         }

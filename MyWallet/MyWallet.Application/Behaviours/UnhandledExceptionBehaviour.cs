@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Application.Behaviours
 {
-    internal class UnhandledExceptionBehaviour
+    public class UnhandledExceptionBehaviour
     {
     }
 }

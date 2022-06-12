@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Domain.Common
 {
-    public class AuditableEntity
+    public class AuditableBaseEntity
     {
+        public int Id { get; set; }
+        public int CreatedById { get; set; }
         
-        public DateTime CreatedDate { get; set; }
-        public DateTime? LastModifiedDate { get; set; }
     }
 }

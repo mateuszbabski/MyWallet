@@ -5,7 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MyWallet.Api.Services;
 using MyWallet.Application;
-using MyWallet.Application.Authentication.Settings;
+
 
 using MyWallet.Application.Interfaces;
 using MyWallet.Persistence;
@@ -19,32 +19,32 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //                options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")));
 
-var jwtSettings = new JWTSettings();
+//var jwtSettings = new JWTSettings();
 
 
-builder.Configuration.GetSection("Authentication").Bind(jwtSettings);
-builder.Services.AddSingleton(jwtSettings);
+//builder.Configuration.GetSection("Authentication").Bind(jwtSettings);
+//builder.Services.AddSingleton(jwtSettings);
 
 
-builder.Services.AddAuthentication(opt =>
-{
-    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-    .AddJwtBearer(cfg =>
-    {
-        cfg.RequireHttpsMetadata = false;
-        cfg.SaveToken = true;
-        cfg.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidIssuer = jwtSettings.Issuer,
-            ValidAudience = jwtSettings.Audience,
-            ValidateIssuer = false,
-            ValidateAudience = false,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
-        };
-    });
+//builder.Services.AddAuthentication(opt =>
+//{
+//    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//    opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+//    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//})
+//    .AddJwtBearer(cfg =>
+//    {
+//        cfg.RequireHttpsMetadata = false;
+//        cfg.SaveToken = true;
+//        cfg.TokenValidationParameters = new TokenValidationParameters
+//        {
+//            ValidIssuer = jwtSettings.Issuer,
+//            ValidAudience = jwtSettings.Audience,
+//            ValidateIssuer = false,
+//            ValidateAudience = false,
+//            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
+//        };
+//    });
 
 
 
