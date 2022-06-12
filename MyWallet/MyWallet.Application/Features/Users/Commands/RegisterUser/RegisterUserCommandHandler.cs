@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
-using MyWallet.Application.Features.Users.Commands.Responses;
+using MyWallet.Application.Authentication;
+
 using MyWallet.Application.Interfaces;
 using MyWallet.Domain.Entities;
 using System;
@@ -13,7 +14,7 @@ namespace MyWallet.Application.Features.Users.Commands.RegisterUser
 {
     public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, AuthenticationResponse>
     {
-       
+
         private readonly IAuthenticationService _authentication;
 
 
@@ -22,7 +23,7 @@ namespace MyWallet.Application.Features.Users.Commands.RegisterUser
             _authentication = authentication;
         }
 
-            
+
 
         public async Task<AuthenticationResponse> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {

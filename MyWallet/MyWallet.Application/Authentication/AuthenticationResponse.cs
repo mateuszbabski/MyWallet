@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyWallet.Application.Features.Users.Commands.Responses
+namespace MyWallet.Application.Authentication
 {
     public class AuthenticationResponse
     {

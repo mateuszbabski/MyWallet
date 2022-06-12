@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-
+using MyWallet.Application.Authentication;
+using MyWallet.Application.Authentication.LoginUser;
+using MyWallet.Application.Authentication.RegisterUser;
 using MyWallet.Application.Features.Users.Commands.LoginUser;
 using MyWallet.Application.Features.Users.Commands.RegisterUser;
-using MyWallet.Application.Features.Users.Commands.Responses;
 using MyWallet.Application.Interfaces;
 using MyWallet.Domain.Entities;
 using MyWallet.Identity.Settings;
@@ -56,6 +57,7 @@ namespace MyWallet.Identity.Services
             {
                 return new AuthenticationResponse { Errors = new[] { "Email is already in use" } };
             }
+
             var newUser = _mapper.Map<User>(request);
             await _userRepository.RegisterNewUserAsync(newUser);
 

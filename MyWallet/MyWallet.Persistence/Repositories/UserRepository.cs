@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using MyWallet.Application.Features.Users.Commands.RegisterUser;
+
 using MyWallet.Application.Features.Users.Queries;
 using MyWallet.Application.Interfaces;
 using MyWallet.Domain.Entities;

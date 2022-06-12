@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-
+using MyWallet.Application.Authentication.RegisterUser;
 using MyWallet.Application.Features.Budgets.Commands.CreateBudget;
 using MyWallet.Application.Features.Budgets.Commands.UpdateBudget;
 using MyWallet.Application.Features.Budgets.Queries.GetAllBudgets;

@@ -1,5 +1,4 @@
-﻿using MyWallet.Application.Features.Users.Commands.RegisterUser;
-using MyWallet.Domain.Entities;
+﻿using MyWallet.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

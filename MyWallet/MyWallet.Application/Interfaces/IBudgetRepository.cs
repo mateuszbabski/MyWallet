@@ -12,8 +12,8 @@ namespace MyWallet.Application.Interfaces
     public interface IBudgetRepository : IAsyncRepository<Budget>
     {
         
-        Task<IEnumerable<Budget>> GetAllBudgetsAsync(int creatorId);
-        Task<Budget> GetBudgetByIdAsync(int id, int creatorId);
+        Task<IEnumerable<Budget>> GetAllBudgetsAsync(int userId);
+        Task<Budget> GetBudgetByIdAsync(int id, int userId);
         Task<int> AddBudgetAsync(Budget budget);
         Task UpdateBudgetAsync(Budget budget);
         Task DeleteBudgetAsync(Budget budget);

@@ -13,16 +13,20 @@ namespace MyWallet.Application.Features.Transactions.Commands.DeleteTransaction
     {
         
         private readonly ITransactionRepository _transactionRepository;
+        private readonly ICurrentUserService _userService;
 
-        public DeleteTransactionCommandHandler(ITransactionRepository transactionRepository)
+        public DeleteTransactionCommandHandler(ITransactionRepository transactionRepository,
+            ICurrentUserService userService)
         {
             
             _transactionRepository = transactionRepository;
+            _userService = userService;
         }
 
         public async Task<Unit> Handle(DeleteTransactionCommand request, CancellationToken cancellationToken)
         {
-            var transaction = await _transactionRepository.GetTransactionByIdAsync(request.Id);
+            var userId = _userService.GetUserId;
+            var transaction = await _transactionRepository.GetTransactionByIdAsync(request.Id, userId);
             if (transaction == null)
                 throw new NotFoundException("Transaction not found");
 

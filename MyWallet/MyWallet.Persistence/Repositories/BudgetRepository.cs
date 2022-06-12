@@ -22,22 +22,22 @@ namespace MyWallet.Persistence.Repositories
         }
 
 
-        public async Task<IEnumerable<Budget>> GetAllBudgetsAsync(int creatorId)
+        public async Task<IEnumerable<Budget>> GetAllBudgetsAsync(int userId)
         {
 
             return await _dbContext
                 .Budgets
-                .Where(i => i.CreatedById == creatorId)
+                .Where(i => i.CreatedById == userId)
                 .Include(t => t.Transactions)
                 .ToListAsync();
         }
 
-        public async Task<Budget> GetBudgetByIdAsync(int id, int creatorId)
+        public async Task<Budget> GetBudgetByIdAsync(int id, int userId)
         {
 
             return await _dbContext
                 .Budgets
-                .Where(i => i.CreatedById == creatorId)
+                .Where(i => i.CreatedById == userId)
                 .Include(t => t.Transactions.OrderByDescending(x => x.TransactionDate).Take(5))
                 .FirstOrDefaultAsync(x => x.Id == id);
         }

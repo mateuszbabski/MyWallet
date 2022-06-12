@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Application.Behaviours
 {
-    public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+    public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> 
+        where TRequest : IRequest<TResponse>
+        
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -31,10 +33,13 @@ namespace MyWallet.Application.Behaviours
                     .ToList();
 
                 if (failures.Any())
+                {
                     throw new ValidationException(failures);
+                }
             }
 
             return await next();
         }
     }
 }
+                    

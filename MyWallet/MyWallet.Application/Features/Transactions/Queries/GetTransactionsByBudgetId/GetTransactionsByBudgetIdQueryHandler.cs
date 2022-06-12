@@ -17,24 +17,25 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionsByBu
         {
             private readonly ITransactionRepository _transactionRepository;
             private readonly IMapper _mapper;
-            
+            private readonly ICurrentUserService _userService;
 
-            public GetTransactionsByBudgetIdQueryHandler(ITransactionRepository transactionRepository,
-                IMapper mapper)
+        public GetTransactionsByBudgetIdQueryHandler(ITransactionRepository transactionRepository,
+                IMapper mapper, 
+                ICurrentUserService userService)
                 
             {
                 _transactionRepository = transactionRepository;
                 _mapper = mapper;
+                _userService = userService;
             }
 
                 
             public async Task<PaginatedList<TransactionInListViewModel>> Handle(GetTransactionsByBudgetIdQuery request,
                 CancellationToken cancellationToken)
             {
-                var transactions = await _transactionRepository.GetTransactionsByBudgetIdAsync(request.SearchPhrase, request.BudgetId, request.PageNumber, request.PageSize);
-                
+                var userId = _userService.GetUserId;
+                var transactions = await _transactionRepository.GetTransactionsByBudgetIdAsync(userId, request.BudgetId, request.PageNumber, request.PageSize);
                 var count = transactions.Count();
-
                 var transactionDto = _mapper.Map<List<TransactionInListViewModel>>(transactions);
                 var result = new PaginatedList<TransactionInListViewModel>(transactionDto, count, request.PageNumber, request.PageSize);
 
@@ -42,6 +43,8 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionsByBu
             }
         }
     }
+                
+
 
                 
                 

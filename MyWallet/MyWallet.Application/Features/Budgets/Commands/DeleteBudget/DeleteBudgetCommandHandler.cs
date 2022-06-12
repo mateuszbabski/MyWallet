@@ -24,8 +24,8 @@ namespace MyWallet.Application.Features.Budgets.Commands.DeleteBudget
 
         public async Task<Unit> Handle(DeleteBudgetCommand request, CancellationToken cancellationToken)
         {
-            var creatorId =  _userService.GetUserId;
-            var budget = await _budgetRepository.GetBudgetByIdAsync(request.Id, creatorId);
+            var userId =  _userService.GetUserId;
+            var budget = await _budgetRepository.GetBudgetByIdAsync(request.Id, userId);
             if (budget == null)
                 throw new NotFoundException("Budget not found");
 

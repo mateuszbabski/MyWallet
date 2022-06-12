@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using MyWallet.Application.Authentication.RegisterUser;
 using MyWallet.Application.Behaviours;
 using MyWallet.Application.Features.Budgets.Commands.CreateBudget;
 using MyWallet.Application.Features.Budgets.Commands.UpdateBudget;
@@ -25,7 +26,12 @@ namespace MyWallet.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddScoped<IValidator<RegisterUserRequest>, RegisterUserValidator>();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
+            
+            
 
             return services;
         }

@@ -17,7 +17,7 @@ namespace MyWallet.Application.Wrappers
         const int maxPageSize = 25;
         public int PageNumber { get; set; } = 1;
 
-        private int _pageSize = 5;
+        private int _pageSize = 2;
 
         public int PageSize
         {

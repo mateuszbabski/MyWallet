@@ -1,6 +1,7 @@
 ﻿using MyWallet.Application.Features.Budgets.Queries.GetBudgetById;
 using MyWallet.Application.Features.Transactions.Queries.GetAllTransactions;
 using MyWallet.Application.Features.Transactions.Queries.GetTransactionById;
+using MyWallet.Application.Wrappers;
 using MyWallet.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,13 @@ namespace MyWallet.Application.Interfaces
 {
     public interface ITransactionRepository : IAsyncRepository<Transaction>
     {
-        Task<IEnumerable<Transaction>> GetAllTransactionsAsync();
-        Task<Transaction> GetTransactionByIdAsync(int id);
+        Task<IEnumerable<Transaction>> GetAllTransactionsAsync(int userId);
+        Task<Transaction> GetTransactionByIdAsync(int id, int userId);
         Task DeleteTransactionAsync(Transaction transaction);
         Task<int> AddTransactionAsync(Transaction transaction);
         Task UpdateTransactionAsync(Transaction transaction);
-        Task<IEnumerable<Transaction>> GetTransactionsByBudgetIdAsync(string searchPhrase, int budgetId, int pageNumber, int pageSize);
-        Task<IEnumerable<Transaction>> GetTransactionsBySearchAsync(string searchPhrase, int pageNumber, int pageSize);
+        Task<IEnumerable<Transaction>> GetTransactionsByBudgetIdAsync(int userId, int budgetId, int pageNumber, int pageSize);
+        Task<IEnumerable<Transaction>> GetTransactionsBySearchAsync(string searchPhrase, int userId, int pageNumber, int pageSize);
 
     }
 }

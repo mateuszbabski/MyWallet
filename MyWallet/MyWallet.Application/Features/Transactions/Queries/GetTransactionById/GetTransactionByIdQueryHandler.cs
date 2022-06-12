@@ -14,19 +14,20 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionById
     {
         private readonly ITransactionRepository _transactionRepository;
         private readonly IMapper _mapper;
-        
+        private readonly ICurrentUserService _userService;
 
         public GetTransactionByIdQueryHandler(ITransactionRepository transactionRepository, 
-            IMapper mapper)
+            IMapper mapper, ICurrentUserService userService)
         {
             _transactionRepository = transactionRepository;
             _mapper = mapper;
-            
+            _userService = userService;
         }
 
         public async Task<TransactionViewModel> Handle(GetTransactionByIdQuery request, CancellationToken cancellationToken)
         {
-            var transaction = await _transactionRepository.GetTransactionByIdAsync(request.Id);
+            var userId = _userService.GetUserId;
+            var transaction = await _transactionRepository.GetTransactionByIdAsync(request.Id, userId);
             if(transaction is null)
                 throw new NotFoundException("Transaction not found");
 

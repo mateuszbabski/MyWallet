@@ -1,5 +1,6 @@
 ﻿using MediatR;
-using MyWallet.Application.Features.Users.Commands.Responses;
+using MyWallet.Application.Authentication;
+
 using MyWallet.Application.Interfaces;
 using System;
 using System.Collections.Generic;

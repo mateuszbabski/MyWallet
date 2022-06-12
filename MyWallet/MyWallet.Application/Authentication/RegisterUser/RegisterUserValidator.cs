@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyWallet.Application.Features.Users.Commands.RegisterUser
+namespace MyWallet.Application.Authentication.RegisterUser
 {
-    public class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>
+    public class RegisterUserValidator : AbstractValidator<RegisterUserRequest>
     {
-        public RegisterUserCommandValidator()
+        public RegisterUserValidator()
         {
             RuleFor(m => m.Email)
                 .NotEmpty()
@@ -21,9 +21,6 @@ namespace MyWallet.Application.Features.Users.Commands.RegisterUser
                 .WithMessage("Password is too short");
 
             RuleFor(x => x.ConfirmPassword).Equal(x => x.Password).WithMessage("Password and confirm password are not the same");
-
         }
     }
 }
-
-

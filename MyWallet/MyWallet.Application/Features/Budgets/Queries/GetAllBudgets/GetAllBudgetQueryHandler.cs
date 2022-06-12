@@ -26,8 +26,8 @@ namespace MyWallet.Application.Features.Budgets.Queries.GetAllBudgets
 
         public async Task<IEnumerable<BudgetInListViewModel>> Handle(GetAllBudgetsQuery request, CancellationToken cancellationToken)
         {
-            var creatorId = _userService.GetUserId;
-            var allBudgets = await _budgetRepository.GetAllBudgetsAsync(creatorId);
+            var userId = _userService.GetUserId;
+            var allBudgets = await _budgetRepository.GetAllBudgetsAsync(userId);
             if (allBudgets == null)
                 throw new NotFoundException("Budgets not found");
 

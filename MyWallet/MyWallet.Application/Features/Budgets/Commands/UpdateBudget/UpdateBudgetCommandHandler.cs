@@ -18,7 +18,9 @@ namespace MyWallet.Application.Features.Budgets.Commands.UpdateBudget
         private readonly IMapper _mapper;
         private readonly ICurrentUserService _userService;
 
-        public UpdateBudgetCommandHandler(IBudgetRepository budgetRepository, IMapper mapper, ICurrentUserService userService)
+        public UpdateBudgetCommandHandler(IBudgetRepository budgetRepository,
+            IMapper mapper,
+            ICurrentUserService userService)
         {
             _budgetRepository = budgetRepository;
             _mapper = mapper;
@@ -26,8 +28,8 @@ namespace MyWallet.Application.Features.Budgets.Commands.UpdateBudget
         }
         public async Task<Unit> Handle(UpdateBudgetCommand request, CancellationToken cancellationToken)
         {
-            var creatorId = _userService.GetUserId;
-            var budget = await _budgetRepository.GetBudgetByIdAsync(request.Id, creatorId);
+            var userId = _userService.GetUserId;
+            var budget = await _budgetRepository.GetBudgetByIdAsync(request.Id, userId);
             if (budget == null)
                 throw new NotFoundException("Budget not found");
 
