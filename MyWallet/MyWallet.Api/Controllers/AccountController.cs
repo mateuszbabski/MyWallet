@@ -1,7 +1,7 @@
 ﻿using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
-using MyWallet.Application.Authentication.Requests;
+
 using MyWallet.Application.Features.Users.Commands.LoginUser;
 using MyWallet.Application.Features.Users.Commands.RegisterUser;
 using MyWallet.Application.Features.Users.Queries.GetUserById;
@@ -14,12 +14,12 @@ namespace MyWallet.Api.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IAuthenticationService _authenticationService;
+        
 
-        public AccountController(IMediator mediator, IAuthenticationService authenticationService)
+        public AccountController(IMediator mediator)
         {
             _mediator = mediator;
-            _authenticationService = authenticationService;
+            
         }
 
         [HttpPost("login")]

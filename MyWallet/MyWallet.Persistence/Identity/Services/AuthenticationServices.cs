@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using MyWallet.Application.Authentication.Requests;
+
 using MyWallet.Application.Features.Users.Commands.LoginUser;
 using MyWallet.Application.Features.Users.Commands.RegisterUser;
 using MyWallet.Application.Features.Users.Commands.Responses;
