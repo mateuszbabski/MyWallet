@@ -12,9 +12,9 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionsByBu
     public class GetTransactionsByBudgetIdQuery : IRequest<PaginatedList<TransactionInListViewModel>>
     {
         public int BudgetId { get; set; }
-        public string SearchPhrase { get; set; }
-
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
     }
 }
+        
+

@@ -15,6 +15,7 @@ namespace MyWallet.Application.Exceptions
 
         public BadRequestException(string? message) : base(message)
         {
+            
         }
 
         public BadRequestException(string? message, Exception? innerException) : base(message, innerException)

@@ -25,7 +25,7 @@ namespace MyWallet.Application.Wrappers
             set { _pageSize = (value > maxPageSize) ? maxPageSize : value; }
         }
 
-        //public string SortBy { get; set; }
-        //public SortDirection SortDirection { get; set; }
     }
 }
+
+        

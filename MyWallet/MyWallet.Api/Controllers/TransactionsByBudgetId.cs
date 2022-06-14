@@ -24,10 +24,10 @@ namespace MyWallet.Api.Controllers
             {
                 PageNumber = request.PageNumber,
                 PageSize = request.PageSize,
-                SearchPhrase = request.SearchPhrase,
                 BudgetId = request.BudgetId
             });
             return Ok(transactionList);
         }
     }
 }
+                

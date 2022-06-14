@@ -20,6 +20,8 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="Logger\" />
+    <Folder Include="Cache\" />
   </ItemGroup>
 
 </Project>

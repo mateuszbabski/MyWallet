@@ -37,9 +37,9 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionsBySe
         {
             var userId = _userService.GetUserId;
             var transactions = await _transactionRepository.GetTransactionsBySearchAsync(request.SearchPhrase, userId, request.PageNumber, request.PageSize);
-            var count = transactions.Count();
-            var transactionDto = _mapper.Map<List<TransactionInListViewModel>>(transactions);
-            var result = new PaginatedList<TransactionInListViewModel>(transactionDto, count, request.PageNumber, request.PageSize);
+            
+            var transactionDto = _mapper.Map<List<TransactionInListViewModel>>(transactions.Items);
+            var result = new PaginatedList<TransactionInListViewModel>(transactionDto, transactions.TotalCount, request.PageNumber, request.PageSize);
 
             return result;
         }

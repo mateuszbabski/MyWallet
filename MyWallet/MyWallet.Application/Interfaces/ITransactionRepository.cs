@@ -18,10 +18,11 @@ namespace MyWallet.Application.Interfaces
         Task DeleteTransactionAsync(Transaction transaction);
         Task<int> AddTransactionAsync(Transaction transaction);
         Task UpdateTransactionAsync(Transaction transaction);
-        Task<IEnumerable<Transaction>> GetTransactionsByBudgetIdAsync(int userId, int budgetId, int pageNumber, int pageSize);
-        Task<IEnumerable<Transaction>> GetTransactionsBySearchAsync(string searchPhrase, int userId, int pageNumber, int pageSize);
+        Task<PaginatedList<Transaction>> GetTransactionsByBudgetIdAsync(int userId, int budgetId, int pageNumber, int pageSize);
+        Task<PaginatedList<Transaction>> GetTransactionsBySearchAsync(string searchPhrase, int userId, int pageNumber, int pageSize);
 
     }
 }
+        
         
         
