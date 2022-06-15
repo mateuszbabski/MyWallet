@@ -1,12 +1,9 @@
 ﻿using MediatR;
-
 using Microsoft.AspNetCore.Mvc;
-using MyWallet.Application.Authentication.LoginUser;
-using MyWallet.Application.Authentication.RegisterUser;
 using MyWallet.Application.Features.Users.Commands.LoginUser;
 using MyWallet.Application.Features.Users.Commands.RegisterUser;
 using MyWallet.Application.Features.Users.Queries.GetUserById;
-using MyWallet.Application.Interfaces;
+
 
 namespace MyWallet.Api.Controllers
 {

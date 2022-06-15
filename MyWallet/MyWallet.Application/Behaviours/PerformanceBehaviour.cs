@@ -14,19 +14,14 @@ namespace MyWallet.Application.Behaviours
         where TRequest : IRequest<TResponse>
     {
         private readonly ILogger<TRequest> _logger;
-        private readonly ICurrentUserService _userService;
-        private readonly IUserRepository _userRepository;
+        
         private readonly Stopwatch _timer;
 
-        public PerformanceBehaviour(ILogger<TRequest> logger, ICurrentUserService userService, IUserRepository userRepository)
+        public PerformanceBehaviour(ILogger<TRequest> logger)
         {
             _logger = logger;
-            _userService = userService;
-            _userRepository = userRepository;
             _timer = new Stopwatch();
-
         }
-
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
             
@@ -48,6 +43,9 @@ namespace MyWallet.Application.Behaviours
         }
     }
 }
+            
+
+
 
 
                 

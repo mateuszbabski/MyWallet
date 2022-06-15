@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using MyWallet.Application.Authentication;
-using MyWallet.Application.Authentication.LoginUser;
-using MyWallet.Application.Authentication.RegisterUser;
 using MyWallet.Application.Features.Users.Commands.LoginUser;
 using MyWallet.Application.Features.Users.Commands.RegisterUser;
 using MyWallet.Application.Interfaces;
