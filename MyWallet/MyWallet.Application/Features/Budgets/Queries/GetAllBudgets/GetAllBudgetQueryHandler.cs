@@ -16,13 +16,17 @@ namespace MyWallet.Application.Features.Budgets.Queries.GetAllBudgets
         private readonly IMapper _mapper;
         private readonly IBudgetRepository _budgetRepository;
         private readonly ICurrentUserService _userService;
+        
 
-        public GetAllBudgetQueryHandler(IMapper mapper, IBudgetRepository budgetRepository, ICurrentUserService userService)
+        public GetAllBudgetQueryHandler(IMapper mapper, 
+            IBudgetRepository budgetRepository, 
+            ICurrentUserService userService)
         {
             _mapper = mapper;
             _budgetRepository = budgetRepository;
             _userService = userService;
         }
+            
 
         public async Task<IEnumerable<BudgetInListViewModel>> Handle(GetAllBudgetsQuery request, CancellationToken cancellationToken)
         {
@@ -30,9 +34,10 @@ namespace MyWallet.Application.Features.Budgets.Queries.GetAllBudgets
             var allBudgets = await _budgetRepository.GetAllBudgetsAsync(userId);
             if (allBudgets == null)
                 throw new NotFoundException("Budgets not found");
-
+               
             return _mapper.Map<List<BudgetInListViewModel>>(allBudgets);
         }
     }
 }
+            
 

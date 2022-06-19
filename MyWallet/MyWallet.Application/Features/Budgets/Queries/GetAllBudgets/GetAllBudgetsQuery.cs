@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MyWallet.Application.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Application.Features.Budgets.Queries.GetAllBudgets
 {
-    public class GetAllBudgetsQuery : IRequest<IEnumerable<BudgetInListViewModel>>
+    public record GetAllBudgetsQuery : IRequest<IEnumerable<BudgetInListViewModel>>
     {
-
+       
     }
 }

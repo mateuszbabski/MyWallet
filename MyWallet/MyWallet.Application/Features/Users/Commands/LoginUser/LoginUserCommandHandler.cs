@@ -22,5 +22,10 @@ namespace MyWallet.Application.Features.Users.Commands.LoginUser
         {
             return await _authentication.LoginAsync(request);
         }
+
+        public Task Handle(LoginUserCommand command)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

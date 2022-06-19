@@ -29,6 +29,7 @@ namespace MyWallet.Api.Controllers
         public async Task<ActionResult<IEnumerable<BudgetInListViewModel>>> GetAllBudgets()
         {
             var budgetList = await _mediator.Send(new GetAllBudgetsQuery());
+                
             return Ok(budgetList);
         }
 

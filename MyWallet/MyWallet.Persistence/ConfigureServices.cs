@@ -9,7 +9,6 @@ using MyWallet.Application.Interfaces;
 using MyWallet.Domain.Entities;
 using MyWallet.Identity.Services;
 using MyWallet.Identity.Settings;
-using MyWallet.Persistence.Cache;
 using MyWallet.Persistence.Context;
 using MyWallet.Persistence.Repositories;
 using System;
@@ -30,14 +29,13 @@ namespace MyWallet.Persistence
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
 
-            var cacheSettings = new CacheSettings();
-            configuration.GetSection("CacheSettings").Bind(cacheSettings);
-
 
             var jwtSettings = new JWTSettings();
 
             configuration.GetSection("Authentication").Bind(jwtSettings);
             services.AddSingleton(jwtSettings);
+
+
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -61,6 +59,7 @@ namespace MyWallet.Persistence
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
+            
             services.AddScoped<IAuthenticationService, AuthenticationServices>();
             services.AddScoped<IBudgetRepository, BudgetRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
