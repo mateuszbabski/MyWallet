@@ -79,22 +79,12 @@ namespace MyWallet.Identity.Services
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var expires = DateTime.Now.AddMinutes(_jwtSettings.DurationInMinutes);
 
-            //var tokenDescriptor = new SecurityTokenDescriptor
-            //{
-            //    Subject = new ClaimsIdentity(claims),
-            //    Issuer = _jwtSettings.Issuer,
-            //    Audience = _jwtSettings.Audience,
-            //    Expires = expires,
-            //    SigningCredentials = cred
-            //};
-
+            
             var tokenDescriptor = new JwtSecurityToken(_jwtSettings.Issuer,
                 _jwtSettings.Audience,
                 claims,
                 expires: expires,
                 signingCredentials: cred);
-
-            //var token = jwtHandler.CreateToken(tokenDescriptor);
 
             return Task.FromResult(new AuthenticationResponse
             {
