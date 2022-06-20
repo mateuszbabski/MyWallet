@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using MyWallet.Api.Services;
 using MyWallet.Application;
 using MyWallet.Application.Interfaces;
+using MyWallet.Application.Middleware;
 using MyWallet.Persistence;
 using MyWallet.Persistence.Context;
 using System.Text;
@@ -65,14 +66,16 @@ builder.Services.AddSwaggerGen(setup =>
 
 var app = builder.Build();
 
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();

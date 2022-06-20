@@ -1,5 +1,7 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using MyWallet.Application.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
