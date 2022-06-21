@@ -10,6 +10,7 @@ using MyWallet.Application.Interfaces;
 using MyWallet.Application.Middleware;
 using MyWallet.Persistence;
 using MyWallet.Persistence.Context;
+using NLog.Web;
 using System.Text;
 
 
@@ -17,6 +18,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.UseNLog();
 
 
 builder.Services.AddApplicationCore();
@@ -28,10 +30,6 @@ builder.Services.AddControllers().AddFluentValidation();
 
 builder.Services.AddSingleton<ICurrentUserService, CurrentUserService>();
 builder.Services.AddHttpContextAccessor();
-
-
-
-
 
 
 builder.Services.AddEndpointsApiExplorer();
@@ -83,3 +81,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+
+

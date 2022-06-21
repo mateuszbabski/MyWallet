@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using MyWallet.Application.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace MyWallet.Application.Middleware
 {
@@ -35,6 +35,7 @@ namespace MyWallet.Application.Middleware
             }
             catch (NotFoundException notFoundException)
             {
+                _logger.LogError("CheckError");
                 context.Response.StatusCode = 404;
                 await context.Response.WriteAsync(notFoundException.Message);
             }

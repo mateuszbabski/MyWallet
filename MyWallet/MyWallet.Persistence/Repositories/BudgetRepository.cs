@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using MyWallet.Application.Features.Budgets.Queries.GetAllBudgets;
 using MyWallet.Application.Features.Budgets.Queries.GetBudgetById;
 using MyWallet.Application.Interfaces;
+
 using MyWallet.Domain.Entities;
 using MyWallet.Persistence.Context;
 using System;
@@ -20,11 +22,11 @@ namespace MyWallet.Persistence.Repositories
         {
             _dbContext = dbContext;
         }
+            
 
 
         public async Task<IEnumerable<Budget>> GetAllBudgetsAsync(int userId)
         {
-
             return await _dbContext
                 .Budgets
                 .Where(i => i.CreatedById == userId)
