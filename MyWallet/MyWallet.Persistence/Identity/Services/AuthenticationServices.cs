@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using MyWallet.Application.Authentication;
-using MyWallet.Application.Features.Users.Commands.LoginUser;
-using MyWallet.Application.Features.Users.Commands.RegisterUser;
+using MyWallet.Application.Authentication.LoginUser;
+using MyWallet.Application.Authentication.RegisterUser;
 using MyWallet.Application.Interfaces;
 using MyWallet.Domain.Entities;
 using MyWallet.Identity.Settings;
@@ -31,7 +31,7 @@ namespace MyWallet.Identity.Services
             _mapper = mapper;
             _passwordHasher = passwordHasher;
         }
-        public async Task<AuthenticationResponse> LoginAsync(LoginUserCommand request)
+        public async Task<AuthenticationResponse> LoginAsync(LoginUserRequest request)
         {
             var user = await _userRepository.GetUserByEmailAsync(request.Email);
             if (user == null)
@@ -48,7 +48,7 @@ namespace MyWallet.Identity.Services
             return await GenerateAuthenticationResponseForUserAsync(user);
         }
 
-        public async Task<AuthenticationResponse> RegisterAsync(RegisterUserCommand request)
+        public async Task<AuthenticationResponse> RegisterAsync(RegisterUserRequest request)
         {
             var isEmailInUse = await _userRepository.GetUserByEmailAsync(request.Email);
             if (isEmailInUse != null)
@@ -63,7 +63,7 @@ namespace MyWallet.Identity.Services
         }
 
 
-        private Task<AuthenticationResponse> GenerateAuthenticationResponseForUserAsync(User user)
+        public Task<AuthenticationResponse> GenerateAuthenticationResponseForUserAsync(User user)
         {
 
             var jwtHandler = new JwtSecurityTokenHandler();

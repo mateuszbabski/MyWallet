@@ -1,9 +1,13 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MyWallet.Application.Features.Users.Commands.LoginUser;
-using MyWallet.Application.Features.Users.Commands.RegisterUser;
+using MyWallet.Application.Authentication.AccountDetails;
+using MyWallet.Application.Authentication.LoginUser;
+using MyWallet.Application.Authentication.RegisterUser;
 using MyWallet.Application.Features.Users.Queries.GetUserById;
 using MyWallet.Application.Interfaces;
+using MyWallet.Domain.Entities;
 
 namespace MyWallet.Api.Controllers
 {
@@ -13,15 +17,25 @@ namespace MyWallet.Api.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IAuthenticationService _authenticationService;
+        private readonly IAccountServices _accountServices;
+        private readonly ICurrentUserService _userService;
+        private readonly IMapper _mapper;
 
-        public AccountController(IMediator mediator, IAuthenticationService authenticationService)
+        public AccountController(IMediator mediator, 
+            IAuthenticationService authenticationService, 
+            IAccountServices accountServices,
+            ICurrentUserService userService,
+            IMapper mapper)
         {
             _mediator = mediator;
             _authenticationService = authenticationService;
+            _accountServices = accountServices;
+            _userService = userService;
+            _mapper = mapper;
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<int>> LoginUser([FromBody] LoginUserCommand command)
+        public async Task<IActionResult> LoginUser([FromBody] LoginUserRequest command)
         {
             var user = await _authenticationService.LoginAsync(command);
             return Ok(user);
@@ -29,39 +43,38 @@ namespace MyWallet.Api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<int>> RegisterNewUser([FromBody] RegisterUserCommand command)
+        public async Task<IActionResult> RegisterNewUser([FromBody] RegisterUserRequest command)
         {
             var newUser = await _authenticationService.RegisterAsync(command);
             return Ok(newUser);
         }
 
-        //[HttpPost("login")]
-        //public async Task<ActionResult<int>> LoginUser([FromBody] LoginUserCommand command)
-        //{
 
-        //    var user = await _mediator.Send(command);
-        //    return Ok(user);
-        //}
+        [Authorize]
+        [HttpPost("changePassword")]
+        public async Task<IActionResult> ChangeUserPassword([FromBody] ChangePasswordRequest request)
+        {
+            var updatedUser = await _accountServices.ChangePasswordAsync(request);
+            return Ok(updatedUser);
+        }
 
-        //[HttpPost("register")]
-        //public async Task<ActionResult<int>> RegisterNewUser([FromBody] RegisterUserCommand command)
-        //{
-        //    var newUser = await _mediator.Send(command);
-        //    return Ok(newUser);
-        //}
+
 
         [HttpGet("{id}", Name = "GetUserById")]
-        public async Task<ActionResult<UserViewModel>> GetUserById(int id)
+        public async Task<UserViewModel> GetUserById(int id)
         {
             var user = await _mediator.Send(new GetUserByIdQuery()
             {
                 Id = id
             });
-            return Ok(user);
+            return user;
         }
+            
+
+        //forgot password
+    }
+}
+
 
         
 
-        //forgot password / change password
-    }
-}

@@ -8,12 +8,8 @@ using System.Threading.Tasks;
 
 namespace MyWallet.Application.Interfaces
 {
-    public interface IUserRepository
+    public interface IAccountServices
     {
-        Task<int> RegisterNewUserAsync(User user);
-        Task<User> GetUserByIdAsync(int id);
-        Task<User> GetUserByEmailAsync(string email);
-
-        Task UpdateUserPasswordAsync(User user);
+        Task<ChangePasswordResponse> ChangePasswordAsync(ChangePasswordRequest request);
     }
 }

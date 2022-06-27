@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using MyWallet.Application.Authentication.AccountDetails;
+using MyWallet.Application.Authentication.RegisterUser;
 using MyWallet.Application.Features.Budgets.Commands.CreateBudget;
 using MyWallet.Application.Features.Budgets.Commands.UpdateBudget;
 using MyWallet.Application.Features.Budgets.Queries.GetAllBudgets;
@@ -7,7 +9,6 @@ using MyWallet.Application.Features.Transactions.Commands.CreateTransaction;
 using MyWallet.Application.Features.Transactions.Commands.UpdateTransaction;
 using MyWallet.Application.Features.Transactions.Queries.GetAllTransactions;
 using MyWallet.Application.Features.Transactions.Queries.GetTransactionById;
-using MyWallet.Application.Features.Users.Commands.RegisterUser;
 using MyWallet.Application.Features.Users.Queries.GetUserById;
 using MyWallet.Domain.Entities;
 using System;
@@ -32,8 +33,11 @@ namespace MyWallet.Application.Mapper
             CreateMap<CreateTransactionCommand, Transaction>().ReverseMap();
             CreateMap<UpdateTransactionCommand, Transaction>().ReverseMap();
 
-            CreateMap<RegisterUserCommand, User>().ReverseMap();
-            CreateMap<User, UserViewModel>();
+            CreateMap<RegisterUserRequest, User>().ReverseMap();
+            CreateMap<User, UserViewModel>().ReverseMap();
+
+            CreateMap<ChangePasswordRequest, User>()
+                .ForMember(x => x.Password, c => c.MapFrom(w => w.NewPassword));
 
             
         }

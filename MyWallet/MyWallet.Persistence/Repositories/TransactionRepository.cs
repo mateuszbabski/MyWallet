@@ -85,6 +85,7 @@ namespace MyWallet.Persistence.Repositories
         {
             await _dbContext.SaveChangesAsync();
         }
+
         public async Task DeleteTransactionAsync(Transaction transaction)
         {
             _dbContext.Transactions.Remove(transaction);

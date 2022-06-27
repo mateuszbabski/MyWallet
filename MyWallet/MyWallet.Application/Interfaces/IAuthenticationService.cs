@@ -1,7 +1,7 @@
 ﻿
 using MyWallet.Application.Authentication;
-using MyWallet.Application.Features.Users.Commands.LoginUser;
-using MyWallet.Application.Features.Users.Commands.RegisterUser;
+using MyWallet.Application.Authentication.LoginUser;
+using MyWallet.Application.Authentication.RegisterUser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +12,8 @@ namespace MyWallet.Application.Interfaces
 {
     public interface IAuthenticationService
     {
-        Task<AuthenticationResponse> RegisterAsync(RegisterUserCommand request);
-        Task<AuthenticationResponse> LoginAsync(LoginUserCommand request);
+        Task<AuthenticationResponse> RegisterAsync(RegisterUserRequest request);
+        Task<AuthenticationResponse> LoginAsync(LoginUserRequest request);
         
     }
 }

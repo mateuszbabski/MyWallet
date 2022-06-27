@@ -35,7 +35,6 @@ namespace MyWallet.Application.Middleware
             }
             catch (NotFoundException notFoundException)
             {
-                _logger.LogError("CheckError");
                 context.Response.StatusCode = 404;
                 await context.Response.WriteAsync(notFoundException.Message);
             }

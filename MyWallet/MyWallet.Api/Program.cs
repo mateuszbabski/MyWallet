@@ -29,6 +29,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddControllers().AddFluentValidation();
 
 builder.Services.AddSingleton<ICurrentUserService, CurrentUserService>();
+
 builder.Services.AddHttpContextAccessor();
 
 

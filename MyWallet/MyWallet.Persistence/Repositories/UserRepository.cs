@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
+using MyWallet.Application.Authentication.AccountDetails;
 using MyWallet.Application.Features.Users.Queries;
 using MyWallet.Application.Interfaces;
 using MyWallet.Domain.Entities;
@@ -42,10 +42,20 @@ namespace MyWallet.Persistence.Repositories
 
             return newUser.Id;
         }
+
+        public async Task UpdateUserPasswordAsync(User user)
+        {
+            await _dbContext.SaveChangesAsync();
+        }
+            
+
+            
+
         public async Task<User> GetUserByIdAsync(int id)
         {
             return await _dbContext
                 .Users
+                //.Include(x => x.Password)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 

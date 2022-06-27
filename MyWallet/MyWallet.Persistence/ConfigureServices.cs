@@ -62,6 +62,7 @@ namespace MyWallet.Persistence
 
             
             services.AddScoped<IAuthenticationService, AuthenticationServices>();
+            services.AddScoped<IAccountServices, AccountServices>();
             services.AddScoped<IBudgetRepository, BudgetRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
