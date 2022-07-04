@@ -63,7 +63,7 @@ namespace MyWallet.Identity.Services
         }
 
 
-        public Task<AuthenticationResponse> GenerateAuthenticationResponseForUserAsync(User user)
+        private Task<AuthenticationResponse> GenerateAuthenticationResponseForUserAsync(User user)
         {
 
             var jwtHandler = new JwtSecurityTokenHandler();
@@ -77,7 +77,7 @@ namespace MyWallet.Identity.Services
             };
 
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddMinutes(_jwtSettings.DurationInMinutes);
+            var expires = DateTime.Now.AddDays(_jwtSettings.DurationInDays);
 
             
             var tokenDescriptor = new JwtSecurityToken(_jwtSettings.Issuer,

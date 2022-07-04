@@ -34,6 +34,7 @@ namespace MyWallet.Persistence.Repositories
                 Email = user.Email,
                 Password = user.Password
             };
+
             var hashedPassword = _passwordHasher.HashPassword(newUser, user.Password);
             newUser.PasswordHash = hashedPassword;
 
@@ -48,14 +49,10 @@ namespace MyWallet.Persistence.Repositories
             await _dbContext.SaveChangesAsync();
         }
             
-
-            
-
         public async Task<User> GetUserByIdAsync(int id)
         {
             return await _dbContext
                 .Users
-                //.Include(x => x.Password)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
@@ -67,6 +64,9 @@ namespace MyWallet.Persistence.Repositories
         }
     }
 }
+
+            
+
 
 
                 

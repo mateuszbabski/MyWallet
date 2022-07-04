@@ -31,8 +31,8 @@ namespace MyWallet.Identity.Services
             _mapper = mapper;
             _userService = userService;
         }
-        //change password
 
+        
         public async Task<ChangePasswordResponse> ChangePasswordAsync(ChangePasswordRequest request)
         {
             var currentUser = _userRepository.GetUserByIdAsync(_userService.GetUserId);

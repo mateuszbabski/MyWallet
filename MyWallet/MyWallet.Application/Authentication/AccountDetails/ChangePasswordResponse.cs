@@ -11,6 +11,6 @@ namespace MyWallet.Application.Authentication.AccountDetails
         public bool IsSuccess { get; set; }
         public string Password { get; set; }
         public string Errors { get; set; }
-        //public string Token { get; set; }
+       
     }
 }
