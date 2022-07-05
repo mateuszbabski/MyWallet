@@ -29,15 +29,17 @@ namespace MyWallet.Application.Wrappers
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
         }
 
-        public static PaginatedList<T> CreateAsync(IQueryable<T> source, int pageNumber, int pageSize)
+        public static PaginatedList<T> CreateAsync(List<T> source, int pageNumber, int pageSize)
         {
             var count = source.Count();
             var items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
 
             return new PaginatedList<T>(items, count, pageNumber, pageSize);
         }
+
     }
 }
+
 
 
 

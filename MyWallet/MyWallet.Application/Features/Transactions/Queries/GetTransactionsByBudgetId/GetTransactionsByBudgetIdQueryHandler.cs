@@ -20,31 +20,36 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionsByBu
             private readonly ICurrentUserService _userService;
 
         public GetTransactionsByBudgetIdQueryHandler(ITransactionRepository transactionRepository,
-                IMapper mapper, 
+                IMapper mapper,
                 ICurrentUserService userService)
-                
-            {
-                _transactionRepository = transactionRepository;
-                _mapper = mapper;
-                _userService = userService;
-            }
 
+        {
+            _transactionRepository = transactionRepository;
+            _mapper = mapper;
+            _userService = userService;
+        }
                 
             public async Task<PaginatedList<TransactionInListViewModel>> Handle(GetTransactionsByBudgetIdQuery request,
                 CancellationToken cancellationToken)
             {
                 var userId = _userService.GetUserId;
-                var transactions = await _transactionRepository.GetTransactionsByBudgetIdAsync(userId, request.BudgetId, request.PageNumber, request.PageSize);
-
+                var transactions = await _transactionRepository.GetTransactionsByBudgetIdAsync(userId, request.BudgetId);
                 
-                var transactionDto = _mapper.Map<List<TransactionInListViewModel>>(transactions.Items);
+                var paginatedTransactions = transactions
+                .Skip((request.PageNumber - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .ToList();
 
-                var result = new PaginatedList<TransactionInListViewModel>(transactionDto, transactions.TotalCount, request.PageNumber, request.PageSize);
+                var transactionDto = _mapper.Map<List<TransactionInListViewModel>>(paginatedTransactions);
 
+                var result = new PaginatedList<TransactionInListViewModel>(transactionDto, transactions.Count(), request.PageNumber, request.PageSize);
+                
                 return result;
             }
         }
-    }
+}
+                
+                
                 
 
                 

@@ -18,14 +18,9 @@ namespace MyWallet.Application.Interfaces
         Task DeleteTransactionAsync(Transaction transaction);
         Task<int> AddTransactionAsync(Transaction transaction);
         Task UpdateTransactionAsync(Transaction transaction);
-        Task<PaginatedList<Transaction>> GetTransactionsByBudgetIdAsync(int userId, int budgetId, int pageNumber, int pageSize);
-        Task<PaginatedList<Transaction>> GetTransactionsBySearchAsync(string searchPhrase, int userId, int pageNumber, int pageSize);
-        Task<PaginatedList<Transaction>> GetTransactionsByDateRangeAsync(int userId,
-            int budgetId,
-            int pageNumber,
-            int pageSize,
-            DateTime dateFrom,
-            DateTime dateTo);
+        Task<IEnumerable<Transaction>> GetTransactionsByBudgetIdAsync(int userId, int budgetId);
+        Task<IEnumerable<Transaction>> GetTransactionsBySearchAsync(int userId, string searchPhrase);
+        Task<IEnumerable<Transaction>> GetTransactionsByDateRangeAsync(int userId, int budgetId, DateTime dateFrom, DateTime dateTo);
 
     }
 }

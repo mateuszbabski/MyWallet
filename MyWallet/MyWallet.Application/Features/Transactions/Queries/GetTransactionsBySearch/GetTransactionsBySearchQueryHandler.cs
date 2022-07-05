@@ -36,10 +36,16 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionsBySe
             CancellationToken cancellationToken)
         {
             var userId = _userService.GetUserId;
-            var transactions = await _transactionRepository.GetTransactionsBySearchAsync(request.SearchPhrase, userId, request.PageNumber, request.PageSize);
+            var transactions = await _transactionRepository.GetTransactionsBySearchAsync(userId, request.SearchPhrase);
+
+            var paginatedTransactions = transactions
+                .Skip((request.PageNumber - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .ToList();
+
+            var transactionDto = _mapper.Map<List<TransactionInListViewModel>>(paginatedTransactions);
             
-            var transactionDto = _mapper.Map<List<TransactionInListViewModel>>(transactions.Items);
-            var result = new PaginatedList<TransactionInListViewModel>(transactionDto, transactions.TotalCount, request.PageNumber, request.PageSize);
+            var result = new PaginatedList<TransactionInListViewModel>(transactionDto, transactions.Count(), request.PageNumber, request.PageSize);
 
             return result;
         }

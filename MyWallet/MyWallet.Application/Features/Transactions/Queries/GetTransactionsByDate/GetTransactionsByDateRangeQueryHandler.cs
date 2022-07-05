@@ -34,16 +34,19 @@ namespace MyWallet.Application.Features.Transactions.Queries.GetTransactionsByDa
             var userId = _userService.GetUserId;
 
             var transactions = await _transactionRepository.GetTransactionsByDateRangeAsync(userId, 
-                request.BudgetId, 
-                request.PageNumber,
-                request.PageSize, 
+                request.BudgetId,
                 request.DateFrom, 
                 request.DateTo);
 
 
-            var transactionDto = _mapper.Map<List<TransactionInListViewModel>>(transactions.Items);
+            var paginatedTransactions = transactions
+                .Skip((request.PageNumber - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .ToList();
 
-            var result = new PaginatedList<TransactionInListViewModel>(transactionDto, transactions.TotalCount, request.PageNumber, request.PageSize);
+            var transactionDto = _mapper.Map<List<TransactionInListViewModel>>(paginatedTransactions);
+
+            var result = new PaginatedList<TransactionInListViewModel>(transactionDto, transactions.Count(), request.PageNumber, request.PageSize);
 
             return result;
         }
