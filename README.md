@@ -1,4 +1,4 @@
-# **HomeBudget Application**
+# **MyWallet Application**
 
 ## **Description**
 
