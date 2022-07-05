@@ -11,13 +11,13 @@ namespace MyWallet.Application.Wrappers
     {
         public string? SearchPhrase { get; set; }
         public int BudgetId { get; set; }
-        //public DateTime? DateFrom { get; set; }
-        //public DateTime? DateTo { get; set; }
+        public DateTime DateFrom { get; set; } = DateTime.MinValue;
+        public DateTime DateTo { get; set; } = DateTime.Now;
 
         const int maxPageSize = 25;
         public int PageNumber { get; set; } = 1;
 
-        private int _pageSize = 2;
+        private int _pageSize = 5;
 
         public int PageSize
         {

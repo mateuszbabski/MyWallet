@@ -69,9 +69,6 @@ namespace MyWallet.Api.Controllers
             });
             return user;
         }
-            
-
-        //forgot password
     }
 }
 

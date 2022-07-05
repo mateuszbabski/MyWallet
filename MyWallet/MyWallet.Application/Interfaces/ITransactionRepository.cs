@@ -20,6 +20,12 @@ namespace MyWallet.Application.Interfaces
         Task UpdateTransactionAsync(Transaction transaction);
         Task<PaginatedList<Transaction>> GetTransactionsByBudgetIdAsync(int userId, int budgetId, int pageNumber, int pageSize);
         Task<PaginatedList<Transaction>> GetTransactionsBySearchAsync(string searchPhrase, int userId, int pageNumber, int pageSize);
+        Task<PaginatedList<Transaction>> GetTransactionsByDateRangeAsync(int userId,
+            int budgetId,
+            int pageNumber,
+            int pageSize,
+            DateTime dateFrom,
+            DateTime dateTo);
 
     }
 }

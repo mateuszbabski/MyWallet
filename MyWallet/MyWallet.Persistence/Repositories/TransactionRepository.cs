@@ -30,7 +30,37 @@ namespace MyWallet.Persistence.Repositories
                 .OrderByDescending(t => t.TransactionDate)
                 .ToListAsync();
         }
-        public async Task<PaginatedList<Transaction>> GetTransactionsByBudgetIdAsync(int userId, int budgetId, int pageNumber, int pageSize)
+
+        public async Task<PaginatedList<Transaction>> GetTransactionsByDateRangeAsync(int userId,
+                int budgetId,
+                int pageNumber,
+                int pageSize,
+                DateTime dateFrom,
+                DateTime dateTo)
+        {
+            var baseQuery = await _dbContext
+                .Transactions
+                .Where(t => t.CreatedById == userId)
+                .Where(t => t.BudgetId == budgetId)
+                .Where(t => t.TransactionDate > dateFrom)
+                .Where(t => t.TransactionDate < dateTo)
+                .OrderByDescending(t => t.TransactionDate)
+                .ToListAsync();
+
+            var count = baseQuery.Count();
+
+            var transactions = baseQuery
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            return new PaginatedList<Transaction>(transactions, count, pageNumber, pageSize);
+        }
+
+        public async Task<PaginatedList<Transaction>> GetTransactionsByBudgetIdAsync(int userId, 
+                int budgetId,
+                int pageNumber, 
+                int pageSize)
         {
 
             var baseQuery = await _dbContext
@@ -51,7 +81,10 @@ namespace MyWallet.Persistence.Repositories
 
         }
 
-        public async Task<PaginatedList<Transaction>> GetTransactionsBySearchAsync(string searchPhrase, int userId, int pageNumber, int pageSize)
+        public async Task<PaginatedList<Transaction>> GetTransactionsBySearchAsync(string searchPhrase, 
+                int userId, 
+                int pageNumber, 
+                int pageSize)
         {
             
                 var baseQuery = await _dbContext

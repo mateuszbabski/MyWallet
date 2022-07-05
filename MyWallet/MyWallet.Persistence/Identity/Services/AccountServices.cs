@@ -61,19 +61,6 @@ namespace MyWallet.Identity.Services
             });
 
         }
-
-
-
-            
-
-        //reset password
-        //public async Task<ForgotPasswordResponse> ForgotPasswordAsync(ForgotPasswordRequest request)
-        //{
-        // user by email
-        // find email
-        // send email with password
-        //}
-
     }
 }
 
