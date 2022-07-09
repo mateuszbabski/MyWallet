@@ -10,6 +10,6 @@ namespace MyWallet.Application.Features.Budgets.Queries.GetAllBudgets
 {
     public record GetAllBudgetsQuery : IRequest<IEnumerable<BudgetInListViewModel>>
     {
-       
+        public int CreatedById { get; set; }
     }
 }

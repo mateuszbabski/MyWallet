@@ -14,19 +14,17 @@ namespace MyWallet.Application.Features.Budgets.Commands.CreateBudget
     {
         private readonly IBudgetRepository _budgetRepository;
         private readonly IMapper _mapper;
-        private readonly ICurrentUserService _userService;
 
-        public CreateBudgetCommandHandler(IBudgetRepository budgetRepository, IMapper mapper, ICurrentUserService userService)
+        public CreateBudgetCommandHandler(IBudgetRepository budgetRepository, IMapper mapper)
         {
             _budgetRepository = budgetRepository;
             _mapper = mapper;
-            _userService = userService;
         }
 
         public async Task<int> Handle(CreateBudgetCommand request, CancellationToken cancellationToken)
         {
             var budget = _mapper.Map<Budget>(request);
-            budget.CreatedById = _userService.GetUserId;
+            budget.CreatedById = request.UserId;
 
             await _budgetRepository.AddBudgetAsync(budget);
 

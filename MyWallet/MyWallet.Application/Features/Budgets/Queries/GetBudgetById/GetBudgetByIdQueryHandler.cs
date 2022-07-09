@@ -15,19 +15,17 @@ namespace MyWallet.Application.Features.Budgets.Queries.GetBudgetById
     {
         private readonly IBudgetRepository _budgetRepository;
         private readonly IMapper _mapper;
-        private readonly ICurrentUserService _userService;
 
-        public GetBudgetByIdQueryHandler(IBudgetRepository budgetRepository, IMapper mapper, ICurrentUserService userService)
+        public GetBudgetByIdQueryHandler(IBudgetRepository budgetRepository, IMapper mapper)
         {
             _budgetRepository = budgetRepository;
             _mapper = mapper;
-            _userService = userService;
         }
 
         public async Task<BudgetViewModel> Handle(GetBudgetByIdQuery request, CancellationToken cancellationToken)
         {
-            var userId = _userService.GetUserId;
-            var budget = await _budgetRepository.GetBudgetByIdAsync(request.Id, userId);
+            
+            var budget = await _budgetRepository.GetBudgetByIdAsync(request.Id, request.CreatedById);
             if (budget == null)
                 throw new NotFoundException("Budget not found");
 
