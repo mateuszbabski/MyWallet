@@ -10,6 +10,5 @@ namespace MyWallet.Application.Features.Budgets.Commands.DeleteBudget
     public class DeleteBudgetCommand : IRequest
     {
         public int Id { get; set; } 
-        public int CreatedById { get; set; }
     }
 }
