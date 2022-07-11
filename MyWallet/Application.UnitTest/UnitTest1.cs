@@ -1,4 +1,4 @@
-namespace MyWallet.Application.UnitTest
+namespace Application.UnitTest
 {
     public class UnitTest1
     {

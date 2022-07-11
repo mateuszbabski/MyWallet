@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using MyWallet.Application.Features.Budgets.Queries.GetAllBudgets;
 using MyWallet.Application.Features.Budgets.Queries.GetBudgetById;
 using MyWallet.Application.Interfaces;
-
 using MyWallet.Domain.Entities;
 using MyWallet.Persistence.Context;
 using System;

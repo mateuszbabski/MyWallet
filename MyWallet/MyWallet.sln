@@ -13,8 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{F5043676-BCD5-474B-ADC2-FC87A1BBCEE5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4514F825-89B7-4417-98D1-02F9F35A0C4B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWallet.Domain", "MyWallet.Domain\MyWallet.Domain.csproj", "{209BCE80-7CCD-4370-9C43-3FE92BDDC349}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWallet.Application", "MyWallet.Application\MyWallet.Application.csproj", "{19184B3A-3A11-43BB-83AE-02D4873A4A40}"
@@ -28,7 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWallet.Application.UnitTest", "MyWallet.Application.UnitTest\MyWallet.Application.UnitTest.csproj", "{2173184B-4863-4159-B3BC-4270C8822AE7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{2033FE20-CDC1-4961-9FBE-E86C78E5216F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,10 +50,6 @@ Global
 		{3A5B4509-DDBE-47CA-906E-74D4E027355E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A5B4509-DDBE-47CA-906E-74D4E027355E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A5B4509-DDBE-47CA-906E-74D4E027355E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2173184B-4863-4159-B3BC-4270C8822AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2173184B-4863-4159-B3BC-4270C8822AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2173184B-4863-4159-B3BC-4270C8822AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2173184B-4863-4159-B3BC-4270C8822AE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,7 +63,6 @@ Global
 		{19184B3A-3A11-43BB-83AE-02D4873A4A40} = {C210FF9F-FCA5-4205-9197-061BE1AC07C0}
 		{F11A9AE7-E5ED-4FAD-9C92-BCB0B8EFF3FB} = {2177ABF6-5C5F-4A32-B274-A62AB67692F6}
 		{3A5B4509-DDBE-47CA-906E-74D4E027355E} = {490EE41E-9564-499F-9AFC-C440E6023C00}
-		{2173184B-4863-4159-B3BC-4270C8822AE7} = {4514F825-89B7-4417-98D1-02F9F35A0C4B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DC8CA78C-C4D8-4D65-A8AB-CF65D621FD40}

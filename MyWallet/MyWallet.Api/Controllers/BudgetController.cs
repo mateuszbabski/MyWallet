@@ -21,8 +21,8 @@ namespace MyWallet.Api.Controllers
         public BudgetController(IMediator mediator)
         {
             _mediator = mediator;
-            
         }
+            
 
         
         [HttpGet(Name = "GetAllBudgets")]

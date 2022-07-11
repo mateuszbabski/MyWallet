@@ -35,7 +35,7 @@ namespace MyWallet.Application.Features.Budgets.Queries.GetAllBudgets
             if (allBudgets == null)
                 throw new NotFoundException("Budgets not found");
                
-            return _mapper.Map<List<BudgetInListViewModel>>(allBudgets);
+            return _mapper.Map<IEnumerable<BudgetInListViewModel>>(allBudgets);
         }
     }
 }
