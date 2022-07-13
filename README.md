@@ -17,7 +17,8 @@ Application is not as easy as another ToDo List or simple Weather Application, b
 
 ## **To be implemented:**
 
-- Whole frontend including graphs
+- Refactor to other architecture
+- Upgraded authentication
 - Tests
 
 
